@@ -1,22 +1,22 @@
 {
-    "name": "MFramework",
+    "name": "mSTL",
     "keywords": ["esp32", "task", "mutex", "queue", "convar", "container", "frameork", "socket"],
     "description": "MFramework is a esp32 IoT stl for useful thinks",
     "authors":
     {
         "name": "Amber-Sophia",
-		"email": "ambersophia.schroeck@outlook.com",
+		"email": "ambersophia.schroeck@gmail.com",
 		"maintainer": true
     },
     "repository":
     {
         "type": "git",
-        "url": "https://github.com/eotpcomic/MFramework"
+        "url": "https://github.com/mstlhost/mSTL"
     },
     "version": "2.40.1",
     "frameworks": "espidf",
     "platforms": "espressif32",
-    "homepage": "https://roseleblood.github.io/mnthread-docs/index.html",
+    "homepage": "https://roseleblood.github.io/mSTL-docs/index.html",
     "export": {
 		"exclude":
 		[
