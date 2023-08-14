@@ -1,4 +1,4 @@
-# Mini Thread Coding Conventions and Style
+# mSTL Coding Conventions and Style
 
 - [1 C and C++](#c-and-c)
   - [Standards](#standards)
@@ -12,9 +12,9 @@
 ## Standards
 
 - C
-  - Mini Thread uses and enforces the ISO9899:1999 (aka ISO C99, C99) C language standard as the minimum.
+  - mSTL uses and enforces the ISO9899:1999 (aka ISO C99, C99) C language standard as the minimum.
 - C++
-  - Mini Thread uses and enforces the ISO14882:2011 (aka ISO C++11, C++11) C++ language standard as the minimum.
+  - mSTL uses and enforces the ISO14882:2011 (aka ISO C++11, C++11) C++ language standard as the minimum.
 
 ## Conventions and Best Practices
 
