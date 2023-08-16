@@ -26,7 +26,7 @@
 
 
 
-namespace mn {
+namespace mofw {
     
      /**
      * @brief Only for declar special version for types
@@ -359,7 +359,7 @@ namespace mn {
         using pointer = T*;
         using base_type = basic_atomic_impl<pointer> ;
         using self_type = _atomic<pointer>;
-        using difference_type = mn::ptrdiff_t;
+        using difference_type = mofw::ptrdiff_t;
 
         _atomic_ptr() = default;
         ~_atomic_ptr() = default;

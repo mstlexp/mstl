@@ -28,7 +28,7 @@
 
 #include "../utils/mn_utils.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace container {
 
 		/**
@@ -36,7 +36,7 @@ namespace mn {
 		 * @ingroup container
 		 *
 		 */
-		template <typename TKEY, typename TVAL, class TAllocator, TComp = mn::less<TKEY> >
+		template <typename TKEY, typename TVAL, class TAllocator, TComp = mofw::less<TKEY> >
 		class basic_multimap : public vector< pair<TKEY, TVAL>, TAllocator > {
 			using base_type = vector<pair<TKEY, TVAL>>;
 		public:
@@ -65,7 +65,7 @@ namespace mn {
 			using range_t = pair<iterator,iterator>	;
 			using key_compare = TComp;
 
-			using initlist_t = mn::initializer_list<value_type>;
+			using initlist_t = mofw::initializer_list<value_type>;
 
 			basic_multimap (const allocator_type& allocator = allocator_type())
 				: base_type(allocator) {}
@@ -81,7 +81,7 @@ namespace mn {
 				: base_type (rhs, allocator) {}
 
 			basic_multimap (basic_multimap&& v)
-				: base_type (mn::move(v)) {}
+				: base_type (mofw::move(v)) {}
 
 			using base_type::size;
 			using base_type::begin;
@@ -109,18 +109,18 @@ namespace mn {
 			}
 
 			const_iterator lower_bound (key_const_reference k) const {
-				return mn::lower_bound (begin(), end(), k, value_key_compare());
+				return mofw::lower_bound (begin(), end(), k, value_key_compare());
 			}
 
 			iterator lower_bound (key_const_reference k) {
-				return mn::lower_bound (begin(), end(), k, value_key_compare());
+				return mofw::lower_bound (begin(), end(), k, value_key_compare());
 			}
 
 			const_iterator upper_bound (key_const_reference k) const	{
-				return mn::upper_bound (begin(), end(), k, value_key_compare());
+				return mofw::upper_bound (begin(), end(), k, value_key_compare());
 			}
 			iterator upper_bound (key_const_reference k) {
-				return mn::upper_bound (begin(), end(), k, value_key_compare());
+				return mofw::upper_bound (begin(), end(), k, value_key_compare());
 			}
 
 			const_iterator	find (key_const_reference k) const {
@@ -143,17 +143,17 @@ namespace mn {
 
 			template <typename... Args>
 			iterator emplace (Args&&... args) {
-				return insert (value_type(mn::forward<Args>(args)...));
+				return insert (value_type(mofw::forward<Args>(args)...));
 			}
 
 			template <typename... Args>
 			iterator emplace_hint (const_iterator h, Args&&... args) {
-				return insert (h, value_type(mn::forward<Args>(args)...));
+				return insert (h, value_type(mofw::forward<Args>(args)...));
 			}
 
 			template <typename... Args>
 			iterator emplace_back (Args&&... args) {
-				return insert (value_type(mn::forward<Args>(args)...));
+				return insert (value_type(mofw::forward<Args>(args)...));
 			}
 		};
 

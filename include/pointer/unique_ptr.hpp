@@ -27,7 +27,7 @@
 #include "../utils/mn_utils.hpp"
 
 
-namespace mn {
+namespace mofw {
 	namespace pointer {
 		/**
 		 * @brief A simple  unique_ptr, for a single object.
@@ -37,7 +37,7 @@ namespace mn {
 		 */
 		template <typename T, class TAllocator = memory::default_allocator,
 				 class TDeleter = memory::default_delete<T, TAllocator> >
-		class basic_unique_ptr : public mn::only_move_tag<void> {
+		class basic_unique_ptr : public mofw::only_move_tag<void> {
 		public:
 			using value_type = T;
 			using pointer = T*;
@@ -97,7 +97,7 @@ namespace mn {
 			 * @brief Move constructor.
 			 */
 			basic_unique_ptr(self_type&& other)
-			 	: m_ptr(other.release()), m_refDeleter(mn::forward<deleter_type>(other.get_deleter()) ) { }
+			 	: m_ptr(other.release()), m_refDeleter(mofw::forward<deleter_type>(other.get_deleter()) ) { }
 
 			/**
 			 * @brief Converting constructor from another type.
@@ -105,7 +105,7 @@ namespace mn {
 			template<typename U, class UAllocator = memory::default_allocator,
 					 class UDeleter = memory::default_delete<U, UAllocator>>
 			basic_unique_ptr(basic_unique_ptr<U, UAllocator, UDeleter>&& other) noexcept
-				: m_ptr(other.release()), m_refDeleter(mn::forward<deleter_type>(other.get_deleter()) ) { }
+				: m_ptr(other.release()), m_refDeleter(mofw::forward<deleter_type>(other.get_deleter()) ) { }
 
 			/**
 			 * @brief Destructor, invokes the deleter if the stored pointer is not null.
@@ -125,7 +125,7 @@ namespace mn {
 			 */
 			self_type&  operator=(self_type&& other) noexcept {
 				reset(other.release());
-				m_refDeleter = mn::forward<deleter_type>(other.get_deleter());
+				m_refDeleter = mofw::forward<deleter_type>(other.get_deleter());
 				return *this;
 			}
 
@@ -138,7 +138,7 @@ namespace mn {
 					 class UDeleter = memory::default_delete<U, UAllocator>>
 			self_type&  operator=(basic_unique_ptr<U, UAllocator, UDeleter>&& other) noexcept {
 				reset(other.release());
-				m_refDeleter = mn::forward<deleter_type>(other.get_deleter());
+				m_refDeleter = mofw::forward<deleter_type>(other.get_deleter());
 				return *this;
 			}
 
@@ -156,7 +156,7 @@ namespace mn {
 			 * @brief Replace the stored pointer.
 			 */
 			void reset(pointer pPtr) noexcept {
-				mn::swap(m_ptr, pPtr);
+				mofw::swap(m_ptr, pPtr);
 				if (pPtr != pointer())
 	  				get_deleter()(pPtr);
 			}
@@ -164,8 +164,8 @@ namespace mn {
 			 * @brief Exchange the pointer and deleter with another object.
 			 */
 			void swap(self_type& other) noexcept {
-				mn::swap(m_ptr, other.m_ptr);
-				mn::swap(m_refDeleter, other.m_refDeleter);
+				mofw::swap(m_ptr, other.m_ptr);
+				mofw::swap(m_refDeleter, other.m_refDeleter);
 			}
 			/**
 			 * @brief Get the stored pointer.
@@ -222,7 +222,7 @@ namespace mn {
 		 * @tparam TDeleter The type of the using deleter.
 		 */
 		template <typename T, class TAllocator, class TDeleter >
-		class basic_unique_ptr<T[], TAllocator, TDeleter> : public mn::only_move_tag<void> {
+		class basic_unique_ptr<T[], TAllocator, TDeleter> : public mofw::only_move_tag<void> {
 		public:
 			using value_type = T;
 			using pointer = T*;
@@ -282,7 +282,7 @@ namespace mn {
 			 * @brief Move constructor.
 			 */
 			basic_unique_ptr(self_type&& other)
-			 	: m_ptr(other.release()), m_refDeleter(mn::forward<deleter_type>(other.get_deleter()) ) { }
+			 	: m_ptr(other.release()), m_refDeleter(mofw::forward<deleter_type>(other.get_deleter()) ) { }
 
 			/**
 			 * @brief Converting constructor from another type.
@@ -290,7 +290,7 @@ namespace mn {
 			template<typename U, class UAllocator = memory::default_allocator,
 					 class UDeleter = memory::default_delete<U, UAllocator>>
 			basic_unique_ptr(basic_unique_ptr<U, UAllocator, UDeleter>&& other) noexcept
-				: m_ptr(other.release()), m_refDeleter(mn::forward<deleter_type>(other.get_deleter()) ) { }
+				: m_ptr(other.release()), m_refDeleter(mofw::forward<deleter_type>(other.get_deleter()) ) { }
 
 			template<typename U>
 			explicit basic_unique_ptr(U* p) noexcept = delete;
@@ -312,7 +312,7 @@ namespace mn {
 			 */
 			self_type&  operator=(self_type&& other) noexcept {
 				reset(other.release());
-				m_refDeleter = mn::forward<deleter_type>(other.get_deleter());
+				m_refDeleter = mofw::forward<deleter_type>(other.get_deleter());
 				return *this;
 			}
 
@@ -325,7 +325,7 @@ namespace mn {
 					 class UDeleter = memory::default_delete<U, UAllocator>>
 			self_type&  operator=(basic_unique_ptr<U, UAllocator, UDeleter>&& other) noexcept {
 				reset(other.release());
-				m_refDeleter = mn::forward<deleter_type>(other.get_deleter());
+				m_refDeleter = mofw::forward<deleter_type>(other.get_deleter());
 				return *this;
 			}
 
@@ -343,7 +343,7 @@ namespace mn {
 			 * @brief Replace the stored pointer.
 			 */
 			void reset(pointer pPtr) noexcept {
-				mn::swap(m_ptr, pPtr);
+				mofw::swap(m_ptr, pPtr);
 				if (pPtr != pointer())
 	  				get_deleter()(pPtr);
 			}
@@ -351,8 +351,8 @@ namespace mn {
 			 * @brief Exchange the pointer and deleter with another object.
 			 */
 			void swap(self_type& other) noexcept {
-				mn::swap(m_ptr, other.m_ptr);
-				mn::swap(m_refDeleter, other.m_refDeleter);
+				mofw::swap(m_ptr, other.m_ptr);
+				mofw::swap(m_refDeleter, other.m_refDeleter);
 			}
 
 			/**
@@ -437,12 +437,12 @@ namespace mn {
 		template<typename T, class TA, class TD>
 		inline bool operator < (basic_unique_ptr<T, TA, TD>& a, basic_unique_ptr<T, TA, TD>& b) {
 			using pointer = typename basic_unique_ptr<T, TA, TD>::pointer;
-			return mn::less<pointer>(a.get(), b.get());
+			return mofw::less<pointer>(a.get(), b.get());
 		}
 		template<typename T, class TA, class TD>
 		inline bool operator > (basic_unique_ptr<T, TA, TD>& a, basic_unique_ptr<T, TA, TD>& b) {
 			using pointer = typename basic_unique_ptr<T, TA, TD>::pointer;
-			return mn::greater<pointer>(a.get(), b.get());
+			return mofw::greater<pointer>(a.get(), b.get());
 		}
 
 		template<typename T, class TA, class TD>
@@ -458,7 +458,7 @@ namespace mn {
 
 		template<typename T, typename... TArgs>
     	inline basic_unique_ptr<T> make_unique(TArgs&&... args) {
-    		return basic_unique_ptr<T>(new T(mn::forward<TArgs>(args)...));
+    		return basic_unique_ptr<T>(new T(mofw::forward<TArgs>(args)...));
 		}
 
 		template<typename T>

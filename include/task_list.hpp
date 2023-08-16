@@ -28,7 +28,7 @@ class basic_task;
 
 #include "copyable.hpp"
 
-namespace mn {
+namespace mofw {
 
     /**
      * A simple task list

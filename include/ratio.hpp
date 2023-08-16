@@ -24,7 +24,7 @@
 
 #define ABS(x)	        		((x) < 0 ? -(x) : (x))
 
-namespace mn {
+namespace mofw {
     template <intmax_t X, intmax_t Y>
 	struct addition_overflow {
 		static const bool c1 = (X <= 0 && 0 <= Y) || (Y < 0 && 0 < X);   

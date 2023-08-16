@@ -23,7 +23,7 @@
 
 #include "config.hpp"
 
-namespace mn {
+namespace mofw {
 	/**
 	 * @brief A dummy class with value-type semantics, mostly useful as a template argument.
 	 */

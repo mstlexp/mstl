@@ -28,7 +28,7 @@
 #define _each_for(type,i,ctr) for (type i = (ctr).rbegin(); i != (ctr).rend(); ++ i)
 
 
-namespace mn {
+namespace mofw {
     struct input_iterator_tag {};
 	struct output_iterator_tag {};
 	struct forward_iterator_tag : public input_iterator_tag {};
@@ -60,13 +60,13 @@ namespace mn {
     namespace internal {
         template<typename TIter>
         constexpr typename iterator_traits<TIter>::difference_type
-        distance(TIter first, TIter last, mn::random_access_iterator_tag) {
+        distance(TIter first, TIter last, mofw::random_access_iterator_tag) {
             return last - first;
         }
 
         template<typename TIter>
         constexpr typename iterator_traits<TIter>::difference_type
-        distance(TIter first, TIter last, mn::input_iterator_tag) {
+        distance(TIter first, TIter last, mofw::input_iterator_tag) {
             typename iterator_traits<TIter>::difference_type _n = 0;
 
             while (first != last) {
@@ -77,11 +77,11 @@ namespace mn {
         }
 
         template<typename TIter, typename TDistance = typename iterator_traits<TIter>::difference_type>
-        constexpr void advance(TIter& iter, TDistance d, mn::random_access_iterator_tag) {
+        constexpr void advance(TIter& iter, TDistance d, mofw::random_access_iterator_tag) {
             iter += d;
         }
         template<typename TIter, typename TDistance = typename iterator_traits<TIter>::difference_type>
-        constexpr void advance(TIter& iter, TDistance d, mn::bidirectional_iterator_tag) {
+        constexpr void advance(TIter& iter, TDistance d, mofw::bidirectional_iterator_tag) {
             if (d >= 0) {
                 while (d--) ++iter;
             } else {
@@ -89,7 +89,7 @@ namespace mn {
             }
         }
         template<typename TIter, typename TDistance = typename iterator_traits<TIter>::difference_type>
-        constexpr void advance(TIter& iter, TDistance d, mn::input_iterator_tag) {
+        constexpr void advance(TIter& iter, TDistance d, mofw::input_iterator_tag) {
             assert(d >= 0);
             while (d--)  ++iter;
         }
@@ -184,7 +184,7 @@ namespace mn {
 			return *(*this + n); }
 
 		constexpr difference_type	operator -  (const self_type& i) const {
-			return mn::distance (i.m_itter, m_itter); }
+			return mofw::distance (i.m_itter, m_itter); }
 	protected:
 		iterator m_itter;
 	};

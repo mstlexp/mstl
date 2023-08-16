@@ -32,7 +32,7 @@
 #include "slock/interrupts_lock.hpp"
 #include "slock/schedular_lock.hpp"
 
-namespace mn {
+namespace mofw {
     namespace system {
 
         /**

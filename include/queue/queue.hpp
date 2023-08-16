@@ -20,7 +20,7 @@
 
 #include "config.hpp"
 
-namespace mn {
+namespace mofw {
     namespace queue {
         /**
          *  @brief Queue class wrapper for FreeRTOS queues

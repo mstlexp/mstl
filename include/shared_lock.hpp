@@ -23,7 +23,7 @@
 #include "Mutex.hpp"
 #include "lock.hpp"
 
-namespace mn {
+namespace mofw {
 
     class shared_mutex {
     public:

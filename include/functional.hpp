@@ -28,7 +28,7 @@
 
 using nullptr_t = decltype(nullptr);
 
-namespace mn {
+namespace mofw {
     template <typename T> struct tag { using type = T; };
     template <typename Tag> using type_t = typename Tag::type;
 
@@ -250,8 +250,8 @@ namespace mn {
 
 	template <size_t VAL, size_t X = 1>
 	struct sqrt{
-		using type = typename mn::conditional<
-			((X * X) > VAL), mn::integral_constant<intmax_t, X - 1>, mn::sqrt<VAL, X + 1> >::type;
+		using type = typename mofw::conditional<
+			((X * X) > VAL), mofw::integral_constant<intmax_t, X - 1>, mofw::sqrt<VAL, X + 1> >::type;
 		static constexpr size_t value = type::value;
 	};
 

@@ -28,7 +28,7 @@
 #include "net_types.hpp"
 
 
-namespace mn {
+namespace mofw {
 	namespace net {
 		/**
 		 * @brief This abstract basic class represents an endpoint/socket address.
@@ -141,7 +141,7 @@ namespace mn {
 			}
 
 			virtual void swap(self_type& rhs) noexcept {
-				mn::swap<uint16_t>(m_iPort, rhs.m_iPort);
+				mofw::swap<uint16_t>(m_iPort, rhs.m_iPort);
 				m_ipAdress.swap(rhs.m_ipAdress);
 			}
 		protected:

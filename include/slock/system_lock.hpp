@@ -20,7 +20,7 @@
 
 #include "../lock.hpp"
 
-namespace mn {
+namespace mofw {
     namespace system {
         /**
          * Interface for all system lock types in this library
@@ -34,7 +34,7 @@ namespace mn {
          * @ingroup Interface
          * @ingroup lock
          */ 
-        class ISystemLockObject : public ::mn::ILockObject {
+        class ISystemLockObject : public ::mofw::ILockObject {
         public:
             /**
              * call lock() 

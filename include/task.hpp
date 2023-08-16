@@ -42,7 +42,7 @@
 
 #include "convar.hpp"
 
-namespace mn {
+namespace mofw {
 
   /**
    * @brief Wrapper class around FreeRTOS's implementation of a task.
@@ -122,8 +122,23 @@ namespace mn {
       Suspended,		  /*!< The task being queried is in the Suspended state, or is in the Blocked state with an infinite time out. */
       Deleted		    /*!< The task being queried has been deleted, but its TCB has not yet been freed. */
     };
+
+    /**
+		* The specific task message
+		*/
+		struct task_message {
+			using message_id = int;
+
+			message_id id;              /*!< The message id */
+			void* message;              /*!< The message*/
+
+
+			task_message(message_id _id, void* _message = nullptr)
+				: id(_id), message(_message) { }
+		};
   public:
   	using native_handle_type = TaskHandle_t;
+    using message_id = typename task_message::message_id;
 
     /**
      * Basic Constructor for this task.
@@ -302,6 +317,27 @@ namespace mn {
     int				  	wait(timespan_t time);
 
     /**
+     * @brief Add a pre-created task message to the task queue
+     *
+     * @param[in] msg The specific message you are adding to the task queue
+     * @param timeout How long to wait to add the item to the queue
+     */
+    void post_msg(task_message* msg, unsigned int timeout);
+
+    /**
+     * @brief Create the task message and add the message to the task queue,
+     * without message data
+     *
+     * @param msg_id The message id
+     * @param timeout How long to wait to add the item to the queue
+     */
+    void post_msg(message_id msg_id, unsigned int timeout) {
+        post_msg(new task_message(msg_id, nullptr), timeout );
+    }
+
+
+
+    /**
      * @brief This virtual function call on creating, use for user code
      * It is optional whether you implement this or not.
      */
@@ -414,19 +450,19 @@ namespace mn {
      *
      * @param secs How long seconds to sleep the task.
      */
-    static void sleep(unsigned int secs)     { mn::delay(timespan_t(0, 0, 0, secs)); }
+    static void sleep(unsigned int secs)     { mofw::delay(timespan_t(0, 0, 0, secs)); }
     /**
      * @brief sleep this task for n micro seconds
      *
      * @param secs How long micro seconds to sleep the task.
      */
-    static void usleep(unsigned int usec)     { mn::delay(timespan_t(0, 0, 0, 0, usec)); }
+    static void usleep(unsigned int usec)     { mofw::delay(timespan_t(0, 0, 0, 0, usec)); }
     /**
      * @brief pause execution for a specified time
      * @note see Linux nanosleep function
      */
     static void nsleep(const timespan_t& req, timespan_t* rem)     {
-      	mn::ndelay(req, rem);
+      	mofw::ndelay(req, rem);
     }
 
     /**
@@ -453,6 +489,10 @@ namespace mn {
      * @return The current task
      */
     static basic_task* get_self();
+  
+    bool have_message();
+    void get_message(task_message *msg, TickType_t timeOut = portMAX_DELAY);
+
   protected:
     /**
      * @brief Adapter function that allows you to write a class
@@ -512,6 +552,10 @@ namespace mn {
      *  condition between dropping the CvLock and waiting.
      */
     binary_semaphore_t m_waitSem;
+
+    mutex_t m_ltMessageQueueLock;
+    queue::queue_t m_qeMessageQueue;
+    convar_t m_cvMessage;
   };
   /**
    * @brief using the basic_task as task_t type

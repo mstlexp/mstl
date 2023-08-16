@@ -28,7 +28,7 @@
 #include <malloc.h>
 #include <stdint.h>
 
-namespace mn {
+namespace mofw {
     namespace container {
         /**
          * A simple template for a Stack

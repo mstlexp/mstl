@@ -22,7 +22,7 @@
 
 #include "../functional.hpp"
 
-namespace mn {
+namespace mofw {
 
 
 	template <typename T, int TAG = 0, typename = void>
@@ -35,7 +35,7 @@ namespace mn {
 		constexpr ebo_storage() = default;
 
 		template<typename U>
-		constexpr ebo_storage(U&& u) noexcept : m_iItem(mn::forward(u) ) {}
+		constexpr ebo_storage(U&& u) noexcept : m_iItem(mofw::forward(u) ) {}
 
 				  		reference get() noexcept 		{ return m_iItem; }
 		constexpr const_reference get() const noexcept 	{ return m_iItem; }
@@ -47,7 +47,7 @@ namespace mn {
 	};
 
 	template <typename T, int TAG>
-	class ebo_storage<T, TAG, mn::enable_if_t<mn::is_class<T>::value>> : private T {
+	class ebo_storage<T, TAG, mofw::enable_if_t<mofw::is_class<T>::value>> : private T {
 		using base_type = T;
 	public:
 		using value_type = T;
@@ -58,7 +58,7 @@ namespace mn {
 
 		constexpr ebo_storage() = default;
 		constexpr ebo_storage(const_reference type)  : base_type(type) { }
-		constexpr ebo_storage(const T&& type) 		 : base_type(mn::move(type)) { }
+		constexpr ebo_storage(const T&& type) 		 : base_type(mofw::move(type)) { }
 
 				  reference 	  get() noexcept 		{ return *this; }
 		constexpr const_reference get() const noexcept 	{ return *this; }

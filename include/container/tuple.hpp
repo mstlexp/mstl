@@ -24,7 +24,7 @@
 #include "../config.hpp"
 #include "../algorithm.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace container {
 
 		template <size_t N, typename T>
@@ -40,17 +40,17 @@ namespace mn {
 			using size_type = size_t;
 			using iterator = pointer;
 			using const_iterator = const pointer;
-			using reverse_iterator = mn::reverse_iterator<iterator>;
-			using const_reverse_iterator = const mn::reverse_iterator<iterator>;
+			using reverse_iterator = mofw::reverse_iterator<iterator>;
+			using const_reverse_iterator = const mofw::reverse_iterator<iterator>;
 
 			basic_tuple() {
-				mn::fill_n (m_dDate, N, T());
+				mofw::fill_n (m_dDate, N, T());
 			}
 
 			basic_tuple(const self_type& t)
 				: m_dDate(t.m_dDate) { }
 
-			basic_tuple (mn::initializer_list<value_type> v) { assign (v); }
+			basic_tuple (mofw::initializer_list<value_type> v) { assign (v); }
 			basic_tuple(const_reference a)
 				: basic_tuple(a, T(), T(), T()) { }
 			basic_tuple(const_reference a, const_reference b)
@@ -65,7 +65,7 @@ namespace mn {
 
 			template <typename U>
 			basic_tuple(const basic_tuple<N, U>& src) {
-				mn::copy_n ( static_cast<T*>(src.m_dDate), N, m_dDate);
+				mofw::copy_n ( static_cast<T*>(src.m_dDate), N, m_dDate);
 			}
 
 			iterator 		begin ()			{ return m_dDate; }
@@ -85,25 +85,25 @@ namespace mn {
 
 			void swap (self_type& v) {
 				 for (uint32_t i = 0; i < N; ++ i)
-				 	mn::swap (m_dDate[i], v.m_dDate[i]);
+				 	mofw::swap (m_dDate[i], v.m_dDate[i]);
 			}
 
-			self_type& assign (mn::initializer_list<value_type> v) {
+			self_type& assign (mofw::initializer_list<value_type> v) {
 				const size_t _is_set = min (v.size(), N);
-				mn::copy_n (v.begin(), _is_set, begin());
-				mn::fill_n (begin()+_is_set, N-_is_set, T());
+				mofw::copy_n (v.begin(), _is_set, begin());
+				mofw::fill_n (begin()+_is_set, N-_is_set, T());
 				return *this;
 			}
 
 			self_type& assign (const self_type& src) {
-				mn::copy_n (src.begin(), N, begin());
+				mofw::copy_n (src.begin(), N, begin());
 				return *this;
 			}
 
 
 			template <typename U>
 			self_type&	operator = (const tuple<N, U>& src) {
-				mn::copy_n ( static_cast<T*>(src.m_dDate), N, m_dDate);
+				mofw::copy_n ( static_cast<T*>(src.m_dDate), N, m_dDate);
 
 				return *this;
 			}
@@ -111,29 +111,29 @@ namespace mn {
 				return assign(src);
 			}
 
-			self_type&	operator = (mn::initializer_list<value_type> v) {
+			self_type&	operator = (mofw::initializer_list<value_type> v) {
 				return assign(v);
 			}
 
-			self_type&	operator += (mn::initializer_list<value_type> v) {
+			self_type&	operator += (mofw::initializer_list<value_type> v) {
 				for (uint32_t i = 0; i < min(N, v.size()); ++ i)
 					m_dDate[i] += v.begin()[i];
 				return *this;
 			}
 
-			self_type&	operator -= (mn::initializer_list<value_type> v) {
+			self_type&	operator -= (mofw::initializer_list<value_type> v) {
 				for (uint32_t i = 0; i < min(N, v.size()); ++ i)
 					_v[i] -= v.begin()[i];
 				return *this;
 			}
 
-			self_type&	operator *= (mn::initializer_list<value_type> v) {
+			self_type&	operator *= (mofw::initializer_list<value_type> v) {
 				for (uint32_t i = 0; i < min(N, v.size()); ++ i)
 					m_dDate[i] *= v.begin()[i];
 				return *this;
 			}
 
-			self_type&	operator /= (mn::initializer_list<value_type> v) {
+			self_type&	operator /= (mofw::initializer_list<value_type> v) {
 				for (uint32_t i = 0; i < min(N, v.size()); ++ i)
 					m_dDate[i] /= v.begin()[i];
 				return *this;

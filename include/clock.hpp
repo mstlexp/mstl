@@ -23,7 +23,7 @@
 
 #include "basic_semaphore.hpp"
 
-namespace mn {
+namespace mofw {
     /**
      * Template wrapper for basic_semaphores for counting lock
      *

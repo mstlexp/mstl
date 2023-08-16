@@ -28,7 +28,7 @@
 #include "../algorithm.hpp"
 #include "../allocator.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace container {
 
 
@@ -40,7 +40,7 @@ namespace mn {
             using pointer = value_type*;
             using reference = value_type&;
             using lreference = T&&;
-            using size_type = mn::size_t;
+            using size_type = mofw::size_t;
 
 
 
@@ -55,7 +55,7 @@ namespace mn {
                 const size_type newSize = oldSize < newCapacity ? oldSize : newCapacity;
                 // Copy old data if needed.
                 if (m_begin) {
-                    mn::copy_construct_n(m_begin, newSize, newBegin);
+                    mofw::copy_construct_n(m_begin, newSize, newBegin);
                     destroy(m_begin, oldSize);
                 }
                 m_begin = newBegin;
@@ -81,13 +81,13 @@ namespace mn {
             }
 
             void destroy(pointer ptr, size_type n) {
-                mn::destruct_n(ptr, n);
+                mofw::destruct_n(ptr, n);
 
 
-                if(mn::is_class<value_type>::value)
+                if(mofw::is_class<value_type>::value)
 					 ptr->~value_type();
 
-				m_allocator.deallocate(ptr, n, mn::alignment_for(sizeof(n)));
+				m_allocator.deallocate(ptr, n, mofw::alignment_for(sizeof(n)));
 
             }
             void reset()  {
@@ -101,10 +101,10 @@ namespace mn {
             }
 
             void swap( self_type& other ) {
-				mn::swap(m_begin, 		other.m_begin);
-				mn::swap(m_end, 		other.m_end);
-				mn::swap(m_capacityEnd, other.m_capacityEnd);
-				mn::swap(m_allocator, 	other.m_allocator);
+				mofw::swap(m_begin, 		other.m_begin);
+				mofw::swap(m_end, 		other.m_end);
+				mofw::swap(m_capacityEnd, other.m_capacityEnd);
+				mofw::swap(m_allocator, 	other.m_allocator);
 			}
 
             pointer              m_begin;
@@ -123,11 +123,11 @@ namespace mn {
             using reference = T&;
             using lreference = T&&;
             using const_reference = const T&;
-            using difference_type = mn::ptrdiff_t;
+            using difference_type = mofw::ptrdiff_t;
             using iterator = pointer;
             using const_iterator = const pointer;
             using allocator_type = TAllocator;
-            using size_type = mn::size_t;
+            using size_type = mofw::size_t;
 
             static const size_type  npos = size_type(-1);
             static const size_type  kInitialCapacity = 16;
@@ -146,7 +146,7 @@ namespace mn {
                 if(rhs.size() == 0) return;
 
                 this->reallocate_discard_old(rhs.capacity());
-                mn::copy_construct_n(rhs.m_begin, rhs.size(), m_begin);
+                mofw::copy_construct_n(rhs.m_begin, rhs.size(), m_begin);
 
                 m_end = m_begin + rhs.size();
                 assert(invariant());
@@ -164,7 +164,7 @@ namespace mn {
                 if (newSize > capacity())
                      reallocate_discard_old(rhs.capacity());
 
-                mn::copy_construct_n(rhs.m_begin, newSize, m_begin);
+                mofw::copy_construct_n(rhs.m_begin, newSize, m_begin);
                 m_end = m_begin + newSize;
 
                 assert(invariant());
@@ -192,20 +192,20 @@ namespace mn {
 
             void push_back(const_reference v) {
                 if (m_end >= m_capacityEnd) grow();
-                mn::copy_construct(m_end++, v);
+                mofw::copy_construct(m_end++, v);
             }
             inline void	 push_back (lreference v)	{
 				if (m_end >= m_capacityEnd) grow();
-                mn::copy_construct(m_end++, mn::move(v));
+                mofw::copy_construct(m_end++, mofw::move(v));
 			}
 
             void push_back() {
                 if (m_end == m_capacityEnd) grow();
-                mn::construct(m_end); ++m_end;
+                mofw::construct(m_end); ++m_end;
             }
             void pop_back() {
                 assert(!empty()); --m_end;
-                mn::destruct<iterator>(m_end);
+                mofw::destruct<iterator>(m_end);
             }
 
             void assign(const pointer first, const pointer last) {
@@ -219,7 +219,7 @@ namespace mn {
                 if (m_begin + count > m_capacityEnd)
                     reallocate_discard_old(compute_new_capacity(count));
 
-                mn::copy_n(first, count, m_begin);
+                mofw::copy_n(first, count, m_begin);
                 m_end = m_begin + count;
 
                 assert(invariant());
@@ -244,18 +244,18 @@ namespace mn {
 
                     iterator itOut = m_begin + prevSize;
                     for (size_type i = 0; i < numAppend; ++i, ++itOut) {
-                        mn::copy_construct(itOut, val);
+                        mofw::copy_construct(itOut, val);
                     }
 
-                    mn::copy_construct_n(m_begin + index, numCopy, itOut);
+                    mofw::copy_construct_n(m_begin + index, numCopy, itOut);
 
                     for (size_type i = 0; i < numCopy; ++i) {
                             m_begin[index + i] = val;
                     }
                 } else {
-                    mn::copy_construct_n(m_end - n, n, m_end);
+                    mofw::copy_construct_n(m_end - n, n, m_end);
                     iterator insertPos = m_begin + index;
-                    mn::move_n(insertPos, prevSize - indexEnd, insertPos + n);
+                    mofw::move_n(insertPos, prevSize - indexEnd, insertPos + n);
                     for (size_type i = 0; i < n; ++i) {
                         insertPos[i] = val;
                     }
@@ -280,7 +280,7 @@ namespace mn {
                     grow();
                     it = m_begin + index;
                 } else {
-                    mn::construct(m_end);
+                    mofw::construct(m_end);
                 }
 
                 if (m_end > it) {
@@ -289,7 +289,7 @@ namespace mn {
                         assert(index <= prevSize);
                         const size_type toMove = prevSize - index;
 
-                        mn::internal::move_n(it, toMove, it + 1, int_to_type<has_trivial_copy<T>::value>());
+                        mofw::internal::move_n(it, toMove, it + 1, int_to_type<has_trivial_copy<T>::value>());
                     } else {
                         assert(it < m_end);
                         const size_t n = reinterpret_cast<uintptr_t>(m_end) - reinterpret_cast<uintptr_t>(it);
@@ -312,7 +312,7 @@ namespace mn {
                     move_down_1(it, int_to_type<has_trivial_copy<T>::value>());
                 }
                 --m_end;
-                mn::destruct<iterator>(m_end);
+                mofw::destruct<iterator>(m_end);
                 return it;
             }
             iterator erase(iterator first, iterator last) {
@@ -412,7 +412,7 @@ namespace mn {
             inline void shrink(size_type newSize) {
                 assert(newSize <= size());
                 const size_type toShrink = size() - newSize;
-                mn::destruct_n(m_begin + newSize, toShrink);
+                mofw::destruct_n(m_begin + newSize, toShrink);
                 m_end = m_begin + newSize;
             }
             inline void move_down_1(iterator it, int_to_type<true> itt) {
@@ -442,14 +442,14 @@ namespace mn {
             using TStorage::reallocate;
         };
 
-		template<typename T, class TAllocator =  mn::memory::default_allocator,
+		template<typename T, class TAllocator =  mofw::memory::default_allocator,
 				 class TStorage = basic_vector_storage<T, TAllocator> >
 		void swap(basic_vector<T, TAllocator, TStorage>& a, basic_vector<T, TAllocator, TStorage>& b) {
 			a.swap(b);
 		}
 
 
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator + (const basic_vector<T, TAllocator, TStorage>& a,
                                                                  const basic_vector<T, TAllocator, TStorage>& b) {
@@ -460,7 +460,7 @@ namespace mn {
                 c.push_back(a[i] + b[i]);
             return c;
         }
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator + (const basic_vector<T, TAllocator, TStorage>& a,
                                                         const T& b) {
@@ -472,7 +472,7 @@ namespace mn {
             return c;
         }
 
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator + (const T& a,
                                                     const basic_vector<T, TAllocator, TStorage>& b) {
@@ -485,7 +485,7 @@ namespace mn {
         }
 
         //sub ------
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator - (const basic_vector<T, TAllocator, TStorage>& a,
                                                     const basic_vector<T, TAllocator, TStorage>& b) {
@@ -497,7 +497,7 @@ namespace mn {
             return c;
         }
 
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator - (const basic_vector<T, TAllocator, TStorage>& a) {
             basic_vector<T, TAllocator, TStorage> c = basic_vector<T, TAllocator, TStorage>();
@@ -508,7 +508,7 @@ namespace mn {
             return c;
         }
 
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator - (const basic_vector<T, TAllocator, TStorage>& a,
                                                     const T& b) {
@@ -520,7 +520,7 @@ namespace mn {
             return c;
         }
 
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator - (const T& a,
                                                     const basic_vector<T, TAllocator, TStorage>& b) {
@@ -533,7 +533,7 @@ namespace mn {
         }
 
         //mul ----
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator * (const basic_vector<T, TAllocator, TStorage>& a,
                                                     const basic_vector<T, TAllocator, TStorage>& b) {
@@ -544,7 +544,7 @@ namespace mn {
                 c.push_back(a[i] * b[i]);
             return c;
         }
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator * (const basic_vector<T, TAllocator, TStorage>& a,
                                                     const T& b) {
@@ -555,7 +555,7 @@ namespace mn {
                 c.push_back(a[i] * b);
             return c;
         }
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator * (const T& a,
                                                     const basic_vector<T, TAllocator, TStorage>& b) {
@@ -568,7 +568,7 @@ namespace mn {
         }
 
         // div -----
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator / (const basic_vector<T, TAllocator, TStorage>& a,
                                                     const basic_vector<T, TAllocator, TStorage>& b) {
@@ -580,7 +580,7 @@ namespace mn {
             return c;
         }
 
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator / (const basic_vector<T, TAllocator, TStorage>& a,
                                                     const T& b) {
@@ -592,7 +592,7 @@ namespace mn {
             return c;
         }
 
-        template<typename T, int calc = 0, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, int calc = 0, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> operator / (const T& a,
                                                     const basic_vector<T, TAllocator, TStorage>& b) {
@@ -605,16 +605,16 @@ namespace mn {
         }
 
         // scale ----
-        template<typename T, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, class TAllocator =  mofw::memory::default_allocator,
          class TStorage = basic_vector_storage<T, TAllocator> >
         inline basic_vector<T, TAllocator, TStorage> scale(const basic_vector<T, TAllocator, TStorage>& v,
                                                     const T s) {
             return v * s;
         }
 
-        template<typename T, class TAllocator =  mn::memory::default_allocator,
+        template<typename T, class TAllocator =  mofw::memory::default_allocator,
 				 class TStorage = basic_vector_storage<T, TAllocator> >
-        using vector = basic_vector<T, mn::memory::default_allocator>;
+        using vector = basic_vector<T, mofw::memory::default_allocator>;
     }
 }
 #endif

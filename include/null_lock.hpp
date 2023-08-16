@@ -25,7 +25,7 @@
 #include "lock.hpp"
 
 
-namespace mn {
+namespace mofw {
     /**
      * @brief Null Lock is a lock object without any lock logic
      *

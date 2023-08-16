@@ -27,7 +27,7 @@
 #include "clone_ptr.hpp"
 
 
-namespace mn {
+namespace mofw {
     namespace pointer {
 
 		template <typename T, class TCloner = basic_default_clone<T>, class TDeleter = memory::default_delete<T>>
@@ -48,7 +48,7 @@ namespace mn {
 			basic_value_ptr() noexcept
     			: m_ptr( cloner_type(), deleter_type() ) {}
 
-			basic_value_ptr(mn::nullptr_t) noexcept
+			basic_value_ptr(mofw::nullptr_t) noexcept
     			: m_ptr( cloner_type(), deleter_type() ) {}
 
 			basic_value_ptr( pointer p ) noexcept
@@ -64,13 +64,13 @@ namespace mn {
     			: m_ptr( cloner, deleter ) { }
 
 			basic_value_ptr(const cloner_type&& cloner )
-    			: m_ptr( mn::move( cloner ) ) { }
+    			: m_ptr( mofw::move( cloner ) ) { }
 
 			basic_value_ptr(const deleter_type&& deleter )
-    			: m_ptr( mn::move( deleter ) ) { }
+    			: m_ptr( mofw::move( deleter ) ) { }
 
 			basic_value_ptr(const cloner_type&& cloner, const deleter_type&& deleter )
-    			: m_ptr( mn::move( cloner ), mn::move( deleter ) ) { }
+    			: m_ptr( mofw::move( cloner ), mofw::move( deleter ) ) { }
 
 
     		basic_value_ptr(const self_type& other )
@@ -80,17 +80,17 @@ namespace mn {
     			: m_ptr( value ) { }
 
 			basic_value_ptr(const self_type&& other )
-    			: m_ptr( mn::move(other.m_ptr) ) {}
+    			: m_ptr( mofw::move(other.m_ptr) ) {}
 
 			basic_value_ptr(const value_type&& value )
-    			: m_ptr( mn::move(value )) { }
+    			: m_ptr( mofw::move(value )) { }
 
 			template< class... Args>
 			basic_value_ptr(Args&&... args)
-				: m_ptr( mn::forward<Args>(args)...) { }
+				: m_ptr( mofw::forward<Args>(args)...) { }
 
 			template< typename U, class... Args>
-			basic_value_ptr(mn::initializer_list<U> il, Args&&... args)
+			basic_value_ptr(mofw::initializer_list<U> il, Args&&... args)
 				: m_ptr(il, std::forward<Args>(args)...) { }
 
 			template <typename V, class VClonerTDeleter>
@@ -123,17 +123,17 @@ namespace mn {
 
 			template< class U >
 			value_type		value_or(U && v) {
-				return has_value() ? *(m_ptr.get()) : static_cast<value_type>(mn::forward<U>( v ) );
+				return has_value() ? *(m_ptr.get()) : static_cast<value_type>(mofw::forward<U>( v ) );
 			}
 
 
 			template< class... Args >
     		void emplace( Args&&... args ) {
-				m_ptr.reset( T( mn::forward<Args>(args)...) );
+				m_ptr.reset( T( mofw::forward<Args>(args)...) );
     		}
 
 			template< class U, class... Args >
-			void emplace( mn::initializer_list<U> il, Args&&... args ) {
+			void emplace( mofw::initializer_list<U> il, Args&&... args ) {
 				m_ptr.reset( T( il, std::forward<Args>(args)...) );
 			}
 
@@ -142,7 +142,7 @@ namespace mn {
 
 			explicit operator bool() const noexcept { return has_value(); }
 
-			self_type& operator = ( mn::nullptr_t ) noexcept {
+			self_type& operator = ( mofw::nullptr_t ) noexcept {
 				m_ptr.reset(); return *this;
 			}
 
@@ -168,27 +168,27 @@ namespace mn {
 			}
 
 			template< class U,
-				typename = typename mn::enable_if<mn::is_same< typename mn::decay<U>::type, T>::value >::type >
+				typename = typename mofw::enable_if<mofw::is_same< typename mofw::decay<U>::type, T>::value >::type >
 			self_type& operator = ( U && value ) {
-				m_ptr.reset( mn::forward<U>( value ) ); return *this;
+				m_ptr.reset( mofw::forward<U>( value ) ); return *this;
 			}
 		private:
-			mn::pointer::clone_ptr<value_type, cloner_type, deleter_type> m_ptr;
+			mofw::pointer::clone_ptr<value_type, cloner_type, deleter_type> m_ptr;
 		};
 
 		template< class T >
-		inline basic_value_ptr< typename mn::decay<T>::type > make_value( T && v ) {
-			return basic_value_ptr< typename mn::decay<T>::type >( mn::forward<T>( v ) );
+		inline basic_value_ptr< typename mofw::decay<T>::type > make_value( T && v ) {
+			return basic_value_ptr< typename mofw::decay<T>::type >( mofw::forward<T>( v ) );
 		}
 
 		template< class T, class... Args >
 		inline basic_value_ptr<T> make_value( Args&&... args ) {
-			return basic_value_ptr<T>(mn::forward<Args>(args)...);
+			return basic_value_ptr<T>(mofw::forward<Args>(args)...);
 		}
 
 		template< class T, class U, class... Args >
-		inline basic_value_ptr<T> make_value( mn::initializer_list<U> il, Args&&... args ) {
-			return basic_value_ptr<T>(il, mn::forward<Args>(args)...);
+		inline basic_value_ptr<T> make_value( mofw::initializer_list<U> il, Args&&... args ) {
+			return basic_value_ptr<T>(il, mofw::forward<Args>(args)...);
 		}
 
 		template< class T, class D, class C >
@@ -201,11 +201,11 @@ namespace mn {
 	}
 }
 
-namespace mn {
+namespace mofw {
 
 	template< class T, class D, class C >
-	struct hash< mn::pointer::value_ptr<T, D, C> > {
-		using argument_type = mn::pointer::value_ptr<T, D, C>;
+	struct hash< mofw::pointer::value_ptr<T, D, C> > {
+		using argument_type = mofw::pointer::value_ptr<T, D, C>;
 		using pointer = typename argument_type::pointer;
 
 		result_type operator()( const argument_type& p ) const noexcept {

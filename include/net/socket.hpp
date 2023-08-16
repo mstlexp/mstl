@@ -24,7 +24,7 @@
 #include "basic_stream_ip_socket.hpp"
 #include "basic_raw_ip_socket.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace net {
 		/**
 		 * @brief using basic_ip4_address for ip4_address

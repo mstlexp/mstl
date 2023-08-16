@@ -23,7 +23,7 @@
 #include "config.hpp"
 #include "functional.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace endian  {
 		enum class order {
 			little,

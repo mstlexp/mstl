@@ -27,7 +27,7 @@
 
 #include <list>
 
-namespace mn {
+namespace mofw {
 
         /**
          * Forward declaration. We need to prevent a circular dependency
@@ -78,7 +78,7 @@ namespace mn {
 				broadcast();
 			}
 
-            int wait(mn::mutex_t& mx, TickType_t timeOut);
+            int wait(mofw::mutex_t& mx, TickType_t timeOut);
 
         private:
             /**

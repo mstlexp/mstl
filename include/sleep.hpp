@@ -36,10 +36,10 @@ MN_EXTERNC_BEGINN
  * @ingroup base
  */
 
-#define MN_DELAY_SEC(sec)		mn::delay(timespan_t(0,0,0,sec,0))
-#define MN_DELAY_MICROS(ms)		mn::delay(timespan_t(0,0,0,0,ms))
+#define MN_DELAY_SEC(sec)		mofw::delay(timespan_t(0,0,0,sec,0))
+#define MN_DELAY_MICROS(ms)		mofw::delay(timespan_t(0,0,0,0,ms))
 
-namespace mn {
+namespace mofw {
 
     /**
      * Delay a task for a given timespan.

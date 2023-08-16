@@ -23,7 +23,7 @@
 #include "basic_ip4_socket.hpp"
 #include "basic_ip6_socket.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace net {
 		/**
 		 * @brief This class provides an interface to a tcp IPv4 socket

@@ -20,7 +20,7 @@
 
 #include "workqueue.hpp"
 
-namespace mn {
+namespace mofw {
     namespace queue {
         /**
          * This class is the single tasked "engine" for work_queue_items.

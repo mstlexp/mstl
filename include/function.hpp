@@ -28,7 +28,7 @@
 #include <type_traits>
 
 
-namespace mn {
+namespace mofw {
 
 	template <class Sig, size_t sz, size_t algn>
     class small_task;
@@ -94,7 +94,7 @@ namespace mn {
         }
 
         return_type operator()(Args... args) const {
-            return table->invoke(&data, mn::forward<Args>(args)...);
+            return table->invoke(&data, mofw::forward<Args>(args)...);
         }
 	private:
 		vtable_t const *table = nullptr;

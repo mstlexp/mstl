@@ -26,7 +26,7 @@
 
 
 
-namespace mn {
+namespace mofw {
     namespace pointer {
 
         template<typename T>
@@ -40,20 +40,20 @@ namespace mn {
 			basic_default_clone() = default;
 
             pointer operator()(const_reference x ) const {
-            	static_assert( ! mn::is_void<T>::value, "basic_default_clone cannot clone incomplete type");
+            	static_assert( ! mofw::is_void<T>::value, "basic_default_clone cannot clone incomplete type");
 
             	return new T( x );
             }
             pointer operator()(T&& x ) const {
-				return new T( mn::move( x ) );
+				return new T( mofw::move( x ) );
             }
 			template< class... Args >
 			pointer operator()(Args&&... args ) const {
-				return new T( mn::forward<Args>(args)...);
+				return new T( mofw::forward<Args>(args)...);
 			}
 			template< class U, class... Args >
-    		pointer operator()(mn::initializer_list<U> il, Args&&... args ) const {
-				 return new T( il, mn::forward<Args>(args)...);
+    		pointer operator()(mofw::initializer_list<U> il, Args&&... args ) const {
+				 return new T( il, mofw::forward<Args>(args)...);
     		}
         };
 
@@ -84,13 +84,13 @@ namespace mn {
     			: cloner_type( cloner ), deleter_type( deleter ), m_ptr( nullptr ) { }
 
 			basic_clone_ptr(const cloner_type&& cloner )
-    			: cloner_type( mn::move(cloner) ), m_ptr( nullptr ) {}
+    			: cloner_type( mofw::move(cloner) ), m_ptr( nullptr ) {}
 
 			basic_clone_ptr(const deleter_type&& deleter )
-    			: deleter_type( mn::move(deleter) ), m_ptr( nullptr ) {}
+    			: deleter_type( mofw::move(deleter) ), m_ptr( nullptr ) {}
 
 			basic_clone_ptr(const cloner_type&& cloner, const deleter_type&& deleter )
-    			: cloner_type( mn::move(cloner) ), deleter_type( mn::move(deleter) ), m_ptr( nullptr ) { }
+    			: cloner_type( mofw::move(cloner) ), deleter_type( mofw::move(deleter) ), m_ptr( nullptr ) { }
 
     		basic_clone_ptr( const self_type& other )
     			: cloner_type ( other ),
@@ -98,37 +98,37 @@ namespace mn {
     			  m_ptr( other.m_ptr ? cloner_type()( *other.m_ptr ) : nullptr ) {}
 
 			basic_clone_ptr(const self_type&& other )
-				: cloner_type ( mn::move(other) ),
-    			  deleter_type( mn::move(other) ),
-    			  m_ptr( mn::move( other.m_ptr ) ) { }
+				: cloner_type ( mofw::move(other) ),
+    			  deleter_type( mofw::move(other) ),
+    			  m_ptr( mofw::move( other.m_ptr ) ) { }
 
 			basic_clone_ptr(const value_type& value )
     			: m_ptr( cloner_type()( value ) ) {}
 
 			basic_clone_ptr(const value_type&& value )
-    			: m_ptr( cloner_type()( mn::move(value )) ) {}
+    			: m_ptr( cloner_type()( mofw::move(value )) ) {}
 
 			template< class... Args >
     		explicit basic_clone_ptr( Args&&... args )
-    			: m_ptr( cloner_type()( mn::forward<Args>(args)...) ) {}
+    			: m_ptr( cloner_type()( mofw::forward<Args>(args)...) ) {}
 
 			template< class U, class... Args >
-			explicit basic_clone_ptr( mn::initializer_list<U> il, Args&&... args )
+			explicit basic_clone_ptr( mofw::initializer_list<U> il, Args&&... args )
 				: m_ptr( cloner_type()(il, std::forward<Args>(args)...) ) { }
 
 			basic_clone_ptr( const value_type& value, const cloner_type & cloner )
     			: cloner_type ( cloner  ) , m_ptr( cloner_type()( value ) ) {}
 
 			basic_clone_ptr( const value_type&& value, const cloner_type && cloner )
-    			: cloner_type ( mn::move(cloner)  ) , m_ptr( cloner_type()( mn::move(value ) ) ) {}
+    			: cloner_type ( mofw::move(cloner)  ) , m_ptr( cloner_type()( mofw::move(value ) ) ) {}
 
 			basic_clone_ptr(const value_type& value, const cloner_type& cloner, const deleter_type& deleter )
     			: cloner_type ( cloner  ), deleter_type( deleter ), m_ptr( cloner_type()( value ) ) {}
 
 			basic_clone_ptr(const value_type&& value, const cloner_type&& cloner, const deleter_type&& deleter )
-    			: cloner_type ( mn::move(cloner)  ),
-    			  deleter_type( mn::move(deleter) ),
-    			  m_ptr( cloner_type()( mn::move(value) ) ) {}
+    			: cloner_type ( mofw::move(cloner)  ),
+    			  deleter_type( mofw::move(deleter) ),
+    			  m_ptr( cloner_type()( mofw::move(value) ) ) {}
 
 
 
@@ -145,7 +145,7 @@ namespace mn {
 
            	pointer release() noexcept {
         		pointer result = nullptr;
-				mn::swap( result, m_ptr );
+				mofw::swap( result, m_ptr );
 				return result;
     		}
 
@@ -158,11 +158,11 @@ namespace mn {
 				reset( get_cloner()( v ) );
 			}
 			void reset(const value_type&& v ) {
-				reset( get_cloner()( mn::move(v) ) );
+				reset( get_cloner()( mofw::move(v) ) );
 			}
 
 			void swap(self_type& other ) noexcept {
-        		mn::swap( m_ptr, other.m_ptr );
+        		mofw::swap( m_ptr, other.m_ptr );
     		}
         private:
             pointer m_ptr;
@@ -186,7 +186,7 @@ namespace mn {
 		 */
 		template<typename T, typename... Args >
 		inline clone_ptr<T> make_clone(Args&&... args) {
-			return clone_ptr<T>(new T (mn::forward<Args>(args)...) );
+			return clone_ptr<T>(new T (mofw::forward<Args>(args)...) );
 		}
     }
 }

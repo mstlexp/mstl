@@ -27,7 +27,7 @@
 
 #include "copyable.hpp"
 
-namespace mn {
+namespace mofw {
     /**
      * @brief Wrapper class around FreeRTOS's implementation of a event_group.
      * @ingroup base

@@ -21,7 +21,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-namespace mn {
+namespace mofw {
     template<int TVal> struct int_to_type {
 	    enum { value = TVal };
 	};

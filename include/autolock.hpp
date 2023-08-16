@@ -31,7 +31,7 @@
 #define portMAX_DELAY 0xffffffffUL
 #endif
 
-namespace mn {
+namespace mofw {
   /**
    * A autolock type for counting_semaphore_t objects
    */
@@ -52,11 +52,11 @@ namespace mn {
   #endif
 
   #if MN_THREAD_CONFIG_LOCK_TYPE == MN_THREAD_CONFIG_MUTEX
-    using LockType_t = mn::mutex_t;
+    using LockType_t = mofw::mutex_t;
   #elif MN_THREAD_CONFIG_LOCK_TYPE == MN_THREAD_CONFIG_BINARY_SEMAPHORE
-    using LockType_t = mn::binary_semaphore_t;
+    using LockType_t = mofw::binary_semaphore_t;
   #elif MN_THREAD_CONFIG_LOCK_TYPE == MN_THREAD_CONFIG_COUNTING_SEMAPHORE
-    using LockType_t = mn::counting_semaphore_t;
+    using LockType_t = mofw::counting_semaphore_t;
   //#elif MN_THREAD_CONFIG_LOCK_TYPE == MN_THREAD_CONFIG_RECURSIVE_MUTEX
   //  using LockType_t = remutex_t;
   #endif

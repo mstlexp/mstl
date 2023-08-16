@@ -22,7 +22,7 @@
 #include "../queue/mn_binaryqueue.hpp"
 #include "../algorithm.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace container {
         template<class T>
         class basic_binary_queue_iterator  {
@@ -73,10 +73,10 @@ namespace mn {
          * @tparam T The type of the value
          * @tparam TITEMSIZE The size of one element
          */
-        template<class T, mn::size_t TITEMSIZE = sizeof(T) >
+        template<class T, mofw::size_t TITEMSIZE = sizeof(T) >
         class basic_binary_queue {
         public:
-            using queue_type = mn::queue::binaryqueue_t;
+            using queue_type = mofw::queue::binaryqueue_t;
             using value_type = T;
             using pointer = T*;
             using reference = T&;
@@ -186,13 +186,13 @@ namespace mn {
             queue_type m_BinQueue;
         };
 
-        template<class T, mn::size_t TITEMSIZE>
+        template<class T, mofw::size_t TITEMSIZE>
         void swap(basic_binary_queue<T, TITEMSIZE>& a, 
                   basic_binary_queue<T, TITEMSIZE>& b) {
             a.swap(b);
         }
 
-        template<class T, mn::size_t TITEMSIZE = sizeof(T)>
+        template<class T, mofw::size_t TITEMSIZE = sizeof(T)>
         using biqueue = basic_binary_queue<T>;
     }
 }

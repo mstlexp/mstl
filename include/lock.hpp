@@ -46,11 +46,11 @@
  *
  * @ingroup lock
  */
-#define LOCKED_SECTION(LOCK, OBJECT) if( (mn::basic_autolock<LOCK> lock(OBJECT)) )
+#define LOCKED_SECTION(LOCK, OBJECT) if( (mofw::basic_autolock<LOCK> lock(OBJECT)) )
 
 
-#define UNLOCKED_SECTION(LOCK, OBJECT) if( (mn::basic_autounlock<LOCK> lock(OBJECT)) )
-namespace mn {
+#define UNLOCKED_SECTION(LOCK, OBJECT) if( (mofw::basic_autounlock<LOCK> lock(OBJECT)) )
+namespace mofw {
     /**
      * Interface for all lock types in this library
      * This is an abstract base class.

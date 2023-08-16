@@ -25,7 +25,7 @@
 
 #include "random.hpp"
 
-namespace mn {
+namespace mofw {
 	/**
      * @brief Pseudro-Random Number Generator based on xor_shift128++ generator
      *

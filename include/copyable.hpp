@@ -22,13 +22,13 @@
 
 #include "config.hpp"
 
-#define	MN_ONCOPYABLE_CLASS		public mn::only_copyable_tag<void>
-#define MN_ONMOVABLE_CLASS		public mn::only_move_tag<void>
-#define MN_ONSIGLETN_CLASS		public mn::only_oneable_tag<void>
+#define	MN_ONCOPYABLE_CLASS		public mofw::only_copyable_tag<void>
+#define MN_ONMOVABLE_CLASS		public mofw::only_move_tag<void>
+#define MN_ONSIGLETN_CLASS		public mofw::only_oneable_tag<void>
 
-#define MN_DEFAULT_CLASS		public mn::copy_move_tag<void>
+#define MN_DEFAULT_CLASS		public mofw::copy_move_tag<void>
 
-namespace mn {
+namespace mofw {
 	/**
 	 * @brief Not movable
 	 */

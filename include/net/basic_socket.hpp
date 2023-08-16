@@ -38,7 +38,7 @@
 
 #define MNTHREAD_NET_INVALID_SOCKET -1
 
-namespace mn {
+namespace mofw {
 	namespace net {
 
 		/**
@@ -134,11 +134,11 @@ namespace mn {
 
 
         	virtual void swap(basic_ip_socket& rhs) noexcept {
-				mn::swap(m_iHandle, rhs.m_iHandle);
-				mn::swap(m_eFam, rhs.m_eFam);
-				mn::swap(m_eType, rhs.m_eType);
-				mn::swap(m_eProtocol, rhs.m_eProtocol);
-				mn::swap(m_bBlocked, rhs.m_bBlocked);
+				mofw::swap(m_iHandle, rhs.m_iHandle);
+				mofw::swap(m_eFam, rhs.m_eFam);
+				mofw::swap(m_eType, rhs.m_eType);
+				mofw::swap(m_eProtocol, rhs.m_eProtocol);
+				mofw::swap(m_bBlocked, rhs.m_bBlocked);
 			}
 
 			/**

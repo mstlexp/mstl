@@ -25,7 +25,7 @@
 #include "copyable.hpp"
 #include "pointer.hpp"
 
-namespace mn {
+namespace mofw {
 
     template < typename T, class TLOCK = LockType_t>
     class basic_singleton  {

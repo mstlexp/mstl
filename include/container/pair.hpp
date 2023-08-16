@@ -21,7 +21,7 @@
 #include "../typetraits.hpp"
 #include "../algorithm.hpp"
 
-namespace mn {
+namespace mofw {
 
 	namespace container {
 		template <typename TFIRST, typename TSECOND>
@@ -84,7 +84,7 @@ namespace mn {
 																				   const TComp& value) {
 			basic_pair<ForwardIterator,ForwardIterator> rv;
 
-			rv.second = rv.first = mn::lower_bound (first, last, value);
+			rv.second = rv.first = mofw::lower_bound (first, last, value);
 			while (rv.second != last && !(value < *(rv.second)))
 				++ rv.second;
 			return rv;

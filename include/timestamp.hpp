@@ -29,10 +29,10 @@
 #define MINILIB_TIMESTAMP_RESELUTION 	1000000
 
 #define MINILIB_TIMESTAMP_TIME_TYPE		typename basic_timespan::time_type
-#define MINILIB_TIMESTAMP_MIN			mn::numeric_limits<MINILIB_TIMESTAMP_TIME_TYPE>::min()
-#define MINILIB_TIMESTAMP_MAX			mn::numeric_limits<MINILIB_TIMESTAMP_TIME_TYPE>::max()
+#define MINILIB_TIMESTAMP_MIN			mofw::numeric_limits<MINILIB_TIMESTAMP_TIME_TYPE>::min()
+#define MINILIB_TIMESTAMP_MAX			mofw::numeric_limits<MINILIB_TIMESTAMP_TIME_TYPE>::max()
 
-namespace mn {
+namespace mofw {
 	/**
 	 * @brief A Timestamp stores a monotonic* time value with microseconds resolution.
 	 * @note  The internal reference time is the Unix epoch,  midnight, January 1, 1970.
@@ -61,9 +61,9 @@ namespace mn {
 		void swap(self_type& time);
 
 		/**
-		 * @brief Creates a timestamp from a mn::time_t.
+		 * @brief Creates a timestamp from a mofw::time_t.
 		 */
-		static self_type from_epoch(const mn::time_t t);
+		static self_type from_epoch(const mofw::time_t t);
 
 		/**
 		 * @brief Creates a timestamp from a UTC time value.
@@ -71,8 +71,8 @@ namespace mn {
 		 */
 		static self_type from_utc(const time_type val);
 
-		mn::time_t get_epoch() const
-			{ return mn::time_t(m_time / MINILIB_TIMESTAMP_RESELUTION); }
+		mofw::time_t get_epoch() const
+			{ return mofw::time_t(m_time / MINILIB_TIMESTAMP_RESELUTION); }
 
 		/**
 		 * @brief Get  the timestamp expressed in UTC-based time.

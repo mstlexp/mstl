@@ -22,7 +22,7 @@
 
 #include "../limits.hpp"
 
-namespace mn {
+namespace mofw {
     /**
      * @brief An Intarface for all randoms classes in this library
      * @author Amber-Sophia Schröck
@@ -88,8 +88,8 @@ namespace mn {
 			return rand32();
         }
 
-        result_type min() { return mn::numeric_limits<result_type>::min(); }
-        result_type max() { return mn::numeric_limits<result_type>::max(); }
+        result_type min() { return mofw::numeric_limits<result_type>::min(); }
+        result_type max() { return mofw::numeric_limits<result_type>::max(); }
     protected:
         seed_t m_startSeed;
     };

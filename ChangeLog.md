@@ -1,7 +1,7 @@
 # Changelog
 
 ## Version 2.30 Juli 2023
-+ add mn::mutex -> mn::mutex like. 
++ add mofw::mutex -> mofw::mutex like. 
 + agg get_self() to convar_task
 + remove device stack
 + remove build errors
@@ -16,19 +16,19 @@
 + add github pull_request_template, security.md and issue templates: bug report and future request.
 + ade the function notify_one and notify_all to convar.
 + !! Rename mn_basic_timespan to mn_timespan !!
-+ !! move wifi and netif stack from mn::net to mn::device. BT, WIFI and TelNet are a device
-+ add mn::device::system a simple device interface to get useful SoC informations
++ !! move wifi and netif stack from mofw::net to mofw::device. BT, WIFI and TelNet are a device
++ add mofw::device::system a simple device interface to get useful SoC informations
 + add device base classes
 + update the examples
 
 
 ## Version 2.29.8906 Mai 2021 (unstable beta)
-+ update mn::container and mn_buffer now support the new allocator system
++ update mofw::container and mn_buffer now support the new allocator system
 + add allocator_typetraits
 + add smart_pointer_traits
 + add container/array
 + add default_deleter and add this support to list
-+ add mn::function a lightwight version of mn::function
++ add mofw::function a lightwight version of mofw::function
 + add a simple unique_ptr pointer
 + add optional
 + add helper function to mn_functional
@@ -43,7 +43,7 @@ add atomic utils:
 add a basic map : basic_light_map
 add endianess function - see include/mn_endianness.hpp
 add basic_void_type for void_t type
-add value_ptr and update clone_ptr to standard of c++11 and add mn::initializer_list
+add value_ptr and update clone_ptr to standard of c++11 and add mofw::initializer_list
 
 ## Versoin 2.28.3098 April 2021 (unstable beta)
 + add atomic_counter class
@@ -84,7 +84,7 @@ add value_ptr and update clone_ptr to standard of c++11 and add mn::initializer_
 ## Version 2.20 März 2021
 + add allocator helpor macros: MNALLOC_OBJECT, MNALLOC_OBJECT_D ... @see MNALLOC_OBJECT
 + update mempool - added MNALLOC_OBJECT systems
-+ add mn::list -- replace mn::list
++ add mofw::list -- replace mofw::list
 + mn_allocator_{multiheap, caps, object, system, buffer, stack} to dirctory allocator
 + Add a any_ptr - basic_any_ptr<void> - can only hold const pointer
 + add uuid_t / guid_t - hash/mn_uuid.hpp
@@ -92,8 +92,8 @@ add value_ptr and update clone_ptr to standard of c++11 and add mn::initializer_
   mn_container include all container types and all special container usings switch to mn_container_esp32.hpp
 + add a red black tree to the cointainer namespace - find under container/mn_rb_tree.hpp
 + add any_ptr - a pointer to hold a const any-variant type
-+ add at mn::cointainer a Template queue with iterator-support
-+ add new algorythmen and mn::functinal support
++ add at mofw::cointainer a Template queue with iterator-support
++ add new algorythmen and mofw::functinal support
 + make atomic ready
 
 ## Version 2.10 Februar 2021
@@ -103,16 +103,16 @@ add value_ptr and update clone_ptr to standard of c++11 and add mn::initializer_
 
 ## Version 2.0.4 Januar 2021
 + add staked, buffered allocator
-+ add allocator, mempool and stack to mn::memory namespace
++ add allocator, mempool and stack to mofw::memory namespace
 + add allocator with mempool backend
 + start add aSTL template classes to this library, aSTL a other lightwidgt STL
   In the future are replace all vector, list, map etc. with aSTL version
   + add auto_ptr, weak_ptr, skoped_ptr, clone_ptr, save_ptr, shared_ptr to library
 + added namespaces:
-  + slock -> mn::system
-  + mempool, allocator and deleter -> mn::memory
-  + foregin_task, convar system, msg task -> mn::ext
-  + trace -> mn::trace
+  + slock -> mofw::system
+  + mempool, allocator and deleter -> mofw::memory
+  + foregin_task, convar system, msg task -> mofw::ext
+  + trace -> mofw::trace
   + all other -> mn
 + rename:
   + func: mn_sleep, mn_usleep and mn_nsleep rename to sleep, nsleep and usleeep

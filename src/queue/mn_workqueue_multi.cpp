@@ -18,7 +18,7 @@
 #include "config.hpp"
 #include "queue/workqueue_multi.hpp"
 
-namespace mn {
+namespace mofw {
     namespace queue {
         //-----------------------------------
         //  constructor

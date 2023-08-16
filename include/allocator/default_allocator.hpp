@@ -24,7 +24,7 @@
 #include "basic_new_allocaor.hpp"
 #include "basic_allocator_stack.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace memory {
 
 		using default_allocator = malloc_allocator<basic_allocator_filter>;

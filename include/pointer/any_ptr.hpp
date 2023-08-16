@@ -22,7 +22,7 @@
 
 #include "../def.hpp"
 
-namespace mn {
+namespace mofw {
     namespace pointer {
 
         template <typename T>

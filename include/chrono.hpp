@@ -29,28 +29,28 @@
 #ifndef MINLIB_CHRONO_
 #define MINLIB_CHRONO_
 
-namespace mn {
+namespace mofw {
     namespace chrono {
 
-        template <typename Rep, typename Period = mn::ratio<1>>
+        template <typename Rep, typename Period = mofw::ratio<1>>
 	    class basic_duration;
 
         namespace internal {
-            template <typename> struct is_ratio                                               : mn::false_type {};
-		    template <intmax_t N, intmax_t D> struct is_ratio<mn::ratio<N, D>>                : mn::true_type {};
-		    template <intmax_t N, intmax_t D> struct is_ratio<const mn::ratio<N, D>>          : mn::true_type {};
-		    template <intmax_t N, intmax_t D> struct is_ratio<volatile mn::ratio<N, D>>       : mn::true_type {};
-		    template <intmax_t N, intmax_t D> struct is_ratio<const volatile mn::ratio<N, D>> : mn::true_type {};
+            template <typename> struct is_ratio                                               : mofw::false_type {};
+		    template <intmax_t N, intmax_t D> struct is_ratio<mofw::ratio<N, D>>                : mofw::true_type {};
+		    template <intmax_t N, intmax_t D> struct is_ratio<const mofw::ratio<N, D>>          : mofw::true_type {};
+		    template <intmax_t N, intmax_t D> struct is_ratio<volatile mofw::ratio<N, D>>       : mofw::true_type {};
+		    template <intmax_t N, intmax_t D> struct is_ratio<const volatile mofw::ratio<N, D>> : mofw::true_type {};
 
-            template<typename> struct is_duration                                                            : mn::false_type{};
-		    template<typename Rep, typename Period> struct is_duration<basic_duration<Rep, Period>>                : mn::true_type{};
-		    template<typename Rep, typename Period> struct is_duration<const basic_duration<Rep, Period>>          : mn::true_type{};
-		    template<typename Rep, typename Period> struct is_duration<volatile basic_duration<Rep, Period>>       : mn::true_type{};
-		    template<typename Rep, typename Period> struct is_duration<const volatile basic_duration<Rep, Period>> : mn::true_type{};
+            template<typename> struct is_duration                                                            : mofw::false_type{};
+		    template<typename Rep, typename Period> struct is_duration<basic_duration<Rep, Period>>                : mofw::true_type{};
+		    template<typename Rep, typename Period> struct is_duration<const basic_duration<Rep, Period>>          : mofw::true_type{};
+		    template<typename Rep, typename Period> struct is_duration<volatile basic_duration<Rep, Period>>       : mofw::true_type{};
+		    template<typename Rep, typename Period> struct is_duration<const volatile basic_duration<Rep, Period>> : mofw::true_type{};
         
             template <typename TFDUR, typename TTDUR, typename TCOMP =
                 typename ratio_divide<typename TFDUR::period_t, typename TTDUR::period_t>::type,
-                typename TCOMR = typename mn::decay<typename mn::common_type<typename TTDUR::rep_t,
+                typename TCOMR = typename mofw::decay<typename mofw::common_type<typename TTDUR::rep_t,
                                                                                  typename TFDUR::rep_t,
                                                                                   intmax_t>::type>::type,
             bool = TCOMP::num == 1,
@@ -95,12 +95,12 @@ namespace mn {
         }
 
         template <typename TTDUR, typename Rep, typename Period>
-        inline typename mn::enable_if<internal::is_duration<TTDUR>::value, TTDUR>::type
+        inline typename mofw::enable_if<internal::is_duration<TTDUR>::value, TTDUR>::type
         duration_cast(const basic_duration<Rep, Period>& d) {
-            return mn::duration_cast_impl< typename basic_duration<Rep, Period>::this_type, TTDUR>::do_cast(d);
+            return mofw::duration_cast_impl< typename basic_duration<Rep, Period>::this_type, TTDUR>::do_cast(d);
         }
 
-        template <class TRep, class TPeriod = mn::ratio<1>>
+        template <class TRep, class TPeriod = mofw::ratio<1>>
         class basic_duration {
         public:
             using this_type = basic_duration<TRep, TPeriod>;
@@ -122,8 +122,8 @@ namespace mn {
             constexpr rep_t count() const { return m_rep; }
 
             constexpr static this_type zero() { return duration(rep_t(0)); }
-		    constexpr static this_type min()  { return duration(mn::numeric_limits<rep_t>::min()); }
-		    constexpr static this_type max()  { return duration(mn::numeric_limits<rep_t>::max()); }
+		    constexpr static this_type min()  { return duration(mofw::numeric_limits<rep_t>::min()); }
+		    constexpr static this_type max()  { return duration(mofw::numeric_limits<rep_t>::max()); }
 
             constexpr inline this_type operator+() const { return *this; }
 		    constexpr inline this_type operator-() const { return duration(0-m_rep); }
@@ -144,67 +144,67 @@ namespace mn {
         };
 
         template <typename TR1, typename TP1, typename TR2, typename TP2>
-        inline typename mn::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type 
+        inline typename mofw::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type 
         operator+(const basic_duration<TR1, TP1>& lhs, const basic_duration<TR2, TP2>& rhs) {
-            using _dur_t_ = typename mn::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type;
+            using _dur_t_ = typename mofw::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type;
             return _dur_t_(_dur_t_(lhs).count() + _dur_t_(rhs).count());
         }
         template <typename TR1, typename TP1, typename TR2, typename TP2>
-        inline typename mn::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type 
+        inline typename mofw::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type 
         operator-(const basic_duration<TR1, TP1>& lhs, const basic_duration<TR2, TP2>& rhs) {
-            using _dur_t_ = typename mn::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type;
+            using _dur_t_ = typename mofw::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type;
             return _dur_t_(_dur_t_(lhs).count() - _dur_t_(rhs).count());
         }
         template <typename TR1, typename TP1, typename TR2, typename TP2>
-        inline typename mn::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type 
+        inline typename mofw::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type 
         operator%(const basic_duration<TR1, TP1>& lhs, const basic_duration<TR2, TP2>& rhs) {
-            using _dur_t_ = typename mn::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type;
+            using _dur_t_ = typename mofw::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type;
             return _dur_t_(_dur_t_(lhs).count() % _dur_t_(rhs).count());
         }
         template <typename TR1, typename TP1, typename TR2>
-        inline basic_duration<typename mn::common_type<TR1, TR2>::type, TP1> 
+        inline basic_duration<typename mofw::common_type<TR1, TR2>::type, TP1> 
         operator*(const basic_duration<TR1, TP1>& lhs, const TR2& rhs) {
-            using _dur_t_ = typename basic_duration<typename mn::common_type<TR1, TR2>::type, TP1>;
+            using _dur_t_ = typename basic_duration<typename mofw::common_type<TR1, TR2>::type, TP1>;
 
             return _dur_t_(_dur_t_(lhs).count() * rhs);
         }
         template <typename TR1, typename TR2, typename TP2>
-        inline basic_duration<typename mn::common_type<TR1, TR2>::type, TP2> 
+        inline basic_duration<typename mofw::common_type<TR1, TR2>::type, TP2> 
         operator*(const TR1& lhs, const duration<TR2, TP2>& rhs) {
-            using _dur_t_ = basic_duration<typename mn::common_type<TR1, TR2>::type, TP2>;
+            using _dur_t_ = basic_duration<typename mofw::common_type<TR1, TR2>::type, TP2>;
             return _dur_t_(lhs * _dur_t_(rhs).count());
         }
         template <typename TR1, typename TP1, typename TR2>
-        inline basic_duration<typename mn::common_type<TR1, TR2>::type, TP1> 
+        inline basic_duration<typename mofw::common_type<TR1, TR2>::type, TP1> 
         operator/(const duration<TR1, TP1>& lhs, const TR2& rhs) {
-            using _dur_t_ = basic_duration<typename mn::common_type<TR1, TR2>::type, TP1>;
+            using _dur_t_ = basic_duration<typename mofw::common_type<TR1, TR2>::type, TP1>;
             return _dur_t_(_dur_t_(lhs).count() / rhs);
         }
 
         template <typename TR1, typename TP1, typename TR2, typename TP2>
-        inline typename mn::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type 
+        inline typename mofw::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type 
         operator/(const basic_duration<TR1, TP1>& lhs, const basic_duration<TR2, TP2>& rhs)
         {
-            using _dur_t_ = typename mn::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type ;
+            using _dur_t_ = typename mofw::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type ;
             return _dur_t_(_dur_t_(lhs).count() / _dur_t_(rhs).count());
         }
 
         template <typename TR1, typename TP1, typename TR2>
-        inline basic_duration<typename mn::common_type<TR1, TR2>::type, TP1> 
+        inline basic_duration<typename mofw::common_type<TR1, TR2>::type, TP1> 
         operator%(const basic_duration<TR1, TP1>& lhs, const TR2& rhs) {
-            using _dur_t_ = typename basic_duration<typename mn::common_type<TR1, TR2>::type, TP1>;
+            using _dur_t_ = typename basic_duration<typename mofw::common_type<TR1, TR2>::type, TP1>;
             return _dur_t_(_dur_t_(lhs).count() % rhs);
         }
 
         template <typename TR1, typename TP1, typename TR2, typename TP2>
         inline bool operator==(const basic_duration<TR1, TP1>& lhs, const basic_duration<TR2, TP2>& rhs) {
-            using _dur_t_ = typename mn::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type ;
+            using _dur_t_ = typename mofw::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type ;
             return _dur_t_(lhs).count() == _dur_t_(rhs).count();
         }
 
         template <typename TR1, typename TP1, typename TR2, typename TP2>
         inline bool operator<(const basic_duration<TR1, TP1>& lhs, const basic_duration<TR2, TP2>& rhs) {
-            using _dur_t_ = typename mn::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type ;
+            using _dur_t_ = typename mofw::common_type<basic_duration<TR1, TP1>, basic_duration<TR2, TP2>>::type ;
             return _dur_t_(lhs).count() < _dur_t_(rhs).count();
         }
 
@@ -260,33 +260,33 @@ namespace mn {
 
         template <typename ToTDUR, typename TCLK, typename TDUR>
         constexpr basic_time_point<TCLK, ToTDUR> time_point_cast(const basic_time_point<TCLK, TDUR>& t,
-            typename mn::enable_if<internal::is_duration<ToTDUR>::value>::type** = 0) {
+            typename mofw::enable_if<internal::is_duration<ToTDUR>::value>::type** = 0) {
             return basic_time_point<TCLK, ToTDUR>(duration_cast<ToTDUR>(t.time_since_epoch()));
         }
 
         template <class TCLK, class TD1, class TR2, class TP2>
-        inline constexpr basic_time_point<TCLK, typename mn::common_type<TD1, basic_duration<TR2, TP2>>::type>
+        inline constexpr basic_time_point<TCLK, typename mofw::common_type<TD1, basic_duration<TR2, TP2>>::type>
         operator+(const basic_time_point<TCLK, TD1>& lhs, const basic_duration<TR2, TP2>& rhs) {
-            using _ctp_t_ = basic_time_point<TCLK, typename mn::common_type<TD1, basic_duration<TR2, TP2>>::type> ;
+            using _ctp_t_ = basic_time_point<TCLK, typename mofw::common_type<TD1, basic_duration<TR2, TP2>>::type> ;
             return _ctp_t_(lhs.time_since_epoch() + rhs);
         }
 
         template <class Rep1, class Period1, class TCLK, class TD2>
-        inline constexpr basic_time_point<TCLK, typename mn::common_type<TD2, basic_duration<Rep1, Period1>>::type>
+        inline constexpr basic_time_point<TCLK, typename mofw::common_type<TD2, basic_duration<Rep1, Period1>>::type>
         operator+(const basic_duration<Rep1, Period1>& lhs, const basic_time_point<TCLK, TD2>& rhs) {
-            using _ctp_t_ = basic_time_point<TCLK, typename mn::common_type<TD2, duration<Rep1, Period1>>::type> ;
+            using _ctp_t_ = basic_time_point<TCLK, typename mofw::common_type<TD2, duration<Rep1, Period1>>::type> ;
             return _ctp_t_(lhs + rhs.time_since_epoch());
         }
 
         template <class TCLK, class TD1, class TR2, class TP2>
-        inline constexpr basic_time_point<TCLK, typename mn::common_type<TD1, basic_duration<TR2, TP2>>::type>
+        inline constexpr basic_time_point<TCLK, typename mofw::common_type<TD1, basic_duration<TR2, TP2>>::type>
         operator-(const basic_time_point<TCLK, TD1>& lhs, const basic_duration<TR2, TP2>& rhs) {
-            using _ctp_t_ = basic_time_point<TCLK, typename mn::common_type<TD1, basic_duration<TR2, TP2>>::type> ;
+            using _ctp_t_ = basic_time_point<TCLK, typename mofw::common_type<TD1, basic_duration<TR2, TP2>>::type> ;
             return _ctp_t_(lhs.time_since_epoch() - rhs);
         }
 
         template <class TCLK, class TD1, class TD2>
-        inline constexpr typename mn::common_type<TD1, TD2>::type operator-( const basic_time_point<TCLK, TD1>& lhs,
+        inline constexpr typename mofw::common_type<TD1, TD2>::type operator-( const basic_time_point<TCLK, TD1>& lhs,
             const basic_time_point<TCLK, TD2>& rhs) {
             return lhs.time_since_epoch() - rhs.time_since_epoch();
         }
@@ -322,28 +322,28 @@ namespace mn {
         }
 
         template <class TCLK, class TD1, class TR2, class TP2>
-        inline constexpr basic_time_point<TCLK, typename mn::common_type<TD1, basic_duration<TR2, TP2>>::type>
+        inline constexpr basic_time_point<TCLK, typename mofw::common_type<TD1, basic_duration<TR2, TP2>>::type>
         operator+(const basic_time_point<TCLK, TD1>& lhs, const basic_duration<TR2, TP2>& rhs) {
-            using _ctp_t_ = basic_time_point<TCLK, typename mn::common_type<TD1, basic_duration<TR2, TP2>>::type>;
+            using _ctp_t_ = basic_time_point<TCLK, typename mofw::common_type<TD1, basic_duration<TR2, TP2>>::type>;
             return _ctp_t_(lhs.time_since_epoch() + rhs);
         }
 
         template <class Rep1, class Period1, class TCLK, class TD2>
-        inline constexpr basic_time_point<TCLK, typename mn::common_type<TD2, basic_duration<Rep1, Period1>>::type>
+        inline constexpr basic_time_point<TCLK, typename mofw::common_type<TD2, basic_duration<Rep1, Period1>>::type>
         operator+(const basic_duration<Rep1, Period1>& lhs, const basic_time_point<TCLK, TD2>& rhs) {
-            using _ctp_t_ = basic_time_point<TCLK, typename mn::common_type<TD2, basic_duration<Rep1, Period1>>::type> ;
+            using _ctp_t_ = basic_time_point<TCLK, typename mofw::common_type<TD2, basic_duration<Rep1, Period1>>::type> ;
             return _ctp_t_(lhs + rhs.time_since_epoch());
         }
 
         template <class TCLK, class TD1, class TR2, class TP2>
-        inline constexpr basic_time_point<TCLK, typename mn::common_type<TD1, basic_duration<TR2, TP2>>::type>
+        inline constexpr basic_time_point<TCLK, typename mofw::common_type<TD1, basic_duration<TR2, TP2>>::type>
         operator-(const basic_time_point<TCLK, TD1>& lhs, const basic_duration<TR2, TP2>& rhs) {
-            using _ctp_t_ = basic_time_point<TCLK, typename mn::common_type<TD1, basic_duration<TR2, TP2>>::type>;
+            using _ctp_t_ = basic_time_point<TCLK, typename mofw::common_type<TD1, basic_duration<TR2, TP2>>::type>;
             return _ctp_t_(lhs.time_since_epoch() - rhs);
         }
 
         template <class TCLK, class TD1, class TD2>
-        inline constexpr typename mn::common_type<TD1, TD2>::type 
+        inline constexpr typename mofw::common_type<TD1, TD2>::type 
         operator-( const basic_time_point<TCLK, TD1>& lhs, const basic_time_point<TCLK, TD2>& rhs) {
             return lhs.time_since_epoch() - rhs.time_since_epoch();
         }
@@ -380,12 +380,12 @@ namespace mn {
         
 
         #define 	NS_PER_TICK   (  1000000000LL / configTICK_RATE_HZ )
-        #define 	CLOCKS_PER_SEC   ( ( clock_t ) configTICK_RATE_HZ )
+        #define 	_CLOCKS_PER_SEC   ( ( clock_t ) configTICK_RATE_HZ )
         
         class system_clock {
         public:
             using rep = long long; 
-            using period = mn::ratio_multiply<mn::ratio<NS_PER_TICK, 1>, nano>::type;
+            using period = mofw::ratio_multiply<mofw::ratio<NS_PER_TICK, 1>, nano>::type;
             using duration = chrono::basic_duration<rep, period>; 
             using time_point = chrono::basic_time_point<system_clock> ;
 
@@ -394,7 +394,7 @@ namespace mn {
 
             // returns a time point representing the current point in time.
             static time_point now() {
-                mn::timespan_t ticks = mn::task_t::get_self()->get_time_since_start();
+                mofw::timespan_t ticks = mofw::task_t::get_self()->get_time_since_start();
                 return time_point(duration(ticks.to_ticks()));
             }
         };
@@ -402,7 +402,7 @@ namespace mn {
 
         
 
-        template <class TRep, class TPeriod = mn::ratio<1>>
+        template <class TRep, class TPeriod = mofw::ratio<1>>
         using duration = basic_duration<TRep, TPeriod>;
 
         template <typename TCLK, typename TDUR = typename TCLK::duration>

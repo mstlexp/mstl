@@ -17,7 +17,7 @@
 #ifndef MINLIB_ESP32_WORK_ITEM_QUEUE_
 #define MINLIB_ESP32_WORK_ITEM_QUEUE_
 
-namespace mn {
+namespace mofw {
     namespace queue {
         /**
          * This is an abstract base class.

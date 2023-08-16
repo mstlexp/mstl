@@ -21,7 +21,7 @@
 #include "workqueue.hpp"
 #include <vector>
 
-namespace mn {
+namespace mofw {
     namespace queue {
         /**
          * This class is the multi task "engine" for work_queue_items.

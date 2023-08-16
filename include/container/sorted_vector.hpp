@@ -25,7 +25,7 @@
 #include "../utils/mn_sort.hpp"
 #include "vector.hpp"
 
-namespace mn {
+namespace mofw {
     namespace container {
         namespace internal {
 
@@ -50,7 +50,7 @@ namespace mn {
         }
 
         template<typename TKey, typename TValue, class TAllocator, 
-        class TCompare = mn::less<TKey>, class TStorage = basic_vector_storage< basic_pair<TKey, TValue>, TAllocator> >
+        class TCompare = mofw::less<TKey>, class TStorage = basic_vector_storage< basic_pair<TKey, TValue>, TAllocator> >
 	    class basic_sorted_vector : private basic_vector<basic_pair<TKey, TValue>, TAllocator, TStorage > {  
             using base_type = basic_vector<basic_pair<TKey, TValue>, TAllocator, TStorage>;
         public:
@@ -76,7 +76,7 @@ namespace mn {
             basic_sorted_vector(InputIterator first, InputIterator last, 
                                 const allocator_type& allocator = allocator_type())
         	                    : base_type(first, last, allocator) {
-         	    mn::quick_sort(begin(), end(), m_compare);
+         	    mofw::quick_sort(begin(), end(), m_compare);
          	    assert(invariant());
             }
 
@@ -137,16 +137,16 @@ namespace mn {
                 return 1;
             }
             iterator lower_bound(const key_type& k) {
-                return mn::lower_bound(begin(), end(), k, m_compare);
+                return mofw::lower_bound(begin(), end(), k, m_compare);
             }
             const_iterator lower_bound(const key_type& k) const {
-                return mn::lower_bound(begin(), end(), k, m_compare);
+                return mofw::lower_bound(begin(), end(), k, m_compare);
             }
             iterator upper_bound(const key_type& k) {
-                return mn::upper_bound(begin(), end(), k, m_compare);
+                return mofw::upper_bound(begin(), end(), k, m_compare);
             }
             const_iterator upper_bound(const key_type& k) const {
-                return mn::upper_bound(begin(), end(), k, m_compare);
+                return mofw::upper_bound(begin(), end(), k, m_compare);
             }
         private:
             bool invariant() const {
@@ -168,8 +168,8 @@ namespace mn {
         };
 
 
-        template<typename TKey, typename TValue, class TCompare = mn::less<TKey> >
-        using sorted_vector = basic_sorted_vector<TKey,TValue, mn::memory::default_allocator_t, TCompare>;
+        template<typename TKey, typename TValue, class TCompare = mofw::less<TKey> >
+        using sorted_vector = basic_sorted_vector<TKey,TValue, mofw::memory::default_allocator_t, TCompare>;
 
     }
 }

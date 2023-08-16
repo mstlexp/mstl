@@ -27,7 +27,7 @@
 #include "algorithm.hpp"
 
 
-namespace mn {
+namespace mofw {
 
 	/**
 	 * @brief This class represents a time span (using microseconds)
@@ -200,7 +200,7 @@ namespace mn {
 		 * @brief Swap this time span with a other time span
 		 */
 		void swap(self_type& other) {
-			mn::swap(m_timeSpan, other.m_timeSpan);
+			mofw::swap(m_timeSpan, other.m_timeSpan);
 		}
 
 		/**

@@ -23,7 +23,7 @@
 #include "workqueue_item.hpp"
 #include "workqueue_task.hpp"
 
-namespace mn {
+namespace mofw {
     namespace queue {
         /**
          * This abstract class is the base "engine" class  for all work_queues.

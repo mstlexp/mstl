@@ -27,7 +27,7 @@
 #include "pointer/lock_ptr.hpp"
 
 
-namespace mn {
+namespace mofw {
 
     /**
      * @brief safe counter is a base of thread saftly counter

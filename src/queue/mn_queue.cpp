@@ -21,7 +21,7 @@
 #include "queue/queue.hpp"
 #include "error.hpp"
 
-namespace mn {
+namespace mofw {
     namespace queue {
         basic_queue::basic_queue(unsigned int maxItems, unsigned int itemSize) 
             : m_pHandle(NULL), m_imaxItems(maxItems), m_iitemSize(itemSize)  { 

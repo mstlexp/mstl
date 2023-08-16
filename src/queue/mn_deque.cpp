@@ -26,7 +26,7 @@
 #include "queue/deque.hpp"
 #include "error.hpp"
 
-namespace mn {
+namespace mofw {
     namespace queue {
         //-----------------------------------
         //  enqueue_front

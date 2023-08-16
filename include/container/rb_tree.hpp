@@ -25,7 +25,7 @@
 #include "../algorithm.hpp"
 
 
-namespace mn {
+namespace mofw {
 	namespace container {
         namespace internal {
 
@@ -90,7 +90,7 @@ namespace mn {
             using value_type = typename TTreeTraits::value_type;
             using allocator_type = TAllocator;
             using self_type = base_rb_tree<TTreeTraits, TAllocator>;
-            using size_type = mn::size_t;
+            using size_type = mofw::size_t;
             using node_type = rb_tree_node<value_type>;
 
             static const size_type NodeSize = sizeof(node_type);
@@ -217,7 +217,7 @@ namespace mn {
                     validate();
                     assert(m_allocator == other.m_allocator);
                     m_root.swap(other.m_root);
-                    mn::swap<size_type>(m_size, other.m_size);
+                    mofw::swap<size_type>(m_size, other.m_size);
                     validate();
                 }
             }
@@ -479,7 +479,7 @@ namespace mn {
             }
 		private:
             node_type* construct_node() {
-            	//void* mem = m_allocator.allocate(NodeSize, mn::alignment_for(NodeSize) );
+            	//void* mem = m_allocator.allocate(NodeSize, mofw::alignment_for(NodeSize) );
                 //return new (mem) node_type();
 
                 return m_allocator.construct<node_type>());
@@ -488,7 +488,7 @@ namespace mn {
             	if(n == nullptr) return;
 
                	// n->~node_type();
-			  	//	m_allocator.deallocate(n, NodeSize, mn::alignment_for(NodeSize));
+			  	//	m_allocator.deallocate(n, NodeSize, mofw::alignment_for(NodeSize));
 			  	//	n = nullptr;
 			  	m_allocator.destroy<node_type>(n));
             }

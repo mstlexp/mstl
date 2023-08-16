@@ -22,7 +22,7 @@
 #include "utils.hpp"
 
 
-namespace mn {
+namespace mofw {
     namespace internal {
 
         MN_TEMPLATE_FULL_DECL_TWO(typename, T, class, TPredicate)
@@ -116,7 +116,7 @@ namespace mn {
 
 	MN_TEMPLATE_FULL_DECL_ONE(typename, T)
     void shell_sort(T* begin, T* end) {
-		shell_sort(begin, end, mn::greater<T>());
+		shell_sort(begin, end, mofw::greater<T>());
 	}
 
 
@@ -150,7 +150,7 @@ namespace mn {
 
     MN_TEMPLATE_FULL_DECL_ONE(typename, T)
     void heap_sort(T* begin, T* end) {
-		heap_sort(begin, end, mn::less<T>());
+		heap_sort(begin, end, mofw::less<T>());
 	}
 
     MN_TEMPLATE_FULL_DECL_TWO(typename, TIter, typename, TPredicate)
@@ -179,7 +179,7 @@ namespace mn {
 
 	MN_TEMPLATE_FULL_DECL_ONE(typename, T)
     void sort(T* begin, T* end) {
-		shell_sort(begin, end, mn::greater<T>());
+		shell_sort(begin, end, mofw::greater<T>());
 	}
 
 

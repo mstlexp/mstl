@@ -49,7 +49,7 @@
 
 
 
-namespace mn {
+namespace mofw {
 	namespace net {
 
 		/**
@@ -106,7 +106,7 @@ namespace mn {
 			virtual int length() const = 0;
 
 			virtual void swap(basic_ip_address& rhs) noexcept {
-				mn::swap<address_family>(m_aFamily, rhs.m_aFamily);
+				mofw::swap<address_family>(m_aFamily, rhs.m_aFamily);
 			}
 		protected:
 			/**

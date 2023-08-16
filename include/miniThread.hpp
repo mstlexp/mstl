@@ -62,7 +62,7 @@
 
 #endif
 
-namespace mn {
+namespace mofw {
     void panic();
 }
 

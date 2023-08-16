@@ -26,7 +26,7 @@
 #include "queue/binaryqueue.hpp"
 #include "error.hpp"
 
-namespace mn
+namespace mofw
 {
     namespace queue
     {

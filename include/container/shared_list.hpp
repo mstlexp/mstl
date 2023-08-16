@@ -29,7 +29,7 @@
 #include "../pointer/mn_shared_ptr.hpp"
 
 #include <list>
-namespace mn {
+namespace mofw {
 	namespace container {
 		/**
 		 * @brief A simple list of shared_ptr items.
@@ -39,7 +39,7 @@ namespace mn {
 		 * @note Only thread safe when you use all functions with end with _save. For example:
 		 * insert_save(..) or push_back_save(..)
 		 */
-		template <typename T, typename TLockType = mn::mutex_t>
+		template <typename T, typename TLockType = mofw::mutex_t>
 		class basic_shared_list : public list< pointer::shared_atomic_ptr<T> > {
 			/**
 			 * @brief The base type of this object.
@@ -335,7 +335,7 @@ namespace mn {
 			lock_type m_lockObject;
 		};
 
-		template <typename T, typename TLockType = mn::mutex_t>
+		template <typename T, typename TLockType = mofw::mutex_t>
 		using shared_ptr_list =  basic_shared_list<T, TLockType>;
 	}
 }

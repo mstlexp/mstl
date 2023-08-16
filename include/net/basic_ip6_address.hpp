@@ -29,18 +29,18 @@
 #define MNNET_IPV6_NEW_ARRAY_LOOP		new uint8_t[MNNET_IPV6_ADDRESS_BYTES]{ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 }
 
 #if MN_THREAD_CONFIG_NET_IPADDRESS6_USE_SCOPEID  == MN_THREAD_CONFIG_YES
-#define MNNET_IPV6_ADDRESS_ANY          mn::net::basic_ip6_address( MNNET_IPV6_NEW_ARRAY_NULL, 0 )
-#define MNNET_IPV6_ADDRESS_LOOPBACK     mn::net::basic_ip6_address( MNNET_IPV6_NEW_ARRAY_LOOP, 0 )
+#define MNNET_IPV6_ADDRESS_ANY          mofw::net::basic_ip6_address( MNNET_IPV6_NEW_ARRAY_NULL, 0 )
+#define MNNET_IPV6_ADDRESS_LOOPBACK     mofw::net::basic_ip6_address( MNNET_IPV6_NEW_ARRAY_LOOP, 0 )
 #else
-#define MNNET_IPV6_ADDRESS_ANY          mn::net::basic_ip6_address( MNNET_IPV6_NEW_ARRAY_NULL )
-#define MNNET_IPV6_ADDRESS_LOOPBACK     mn::net::basic_ip6_address( MNNET_IPV6_NEW_ARRAY_LOOP )
+#define MNNET_IPV6_ADDRESS_ANY          mofw::net::basic_ip6_address( MNNET_IPV6_NEW_ARRAY_NULL )
+#define MNNET_IPV6_ADDRESS_LOOPBACK     mofw::net::basic_ip6_address( MNNET_IPV6_NEW_ARRAY_LOOP )
 #endif // MN_THREAD_CONFIG_NET_IPADDRESS6_USE_SCOPEID
 
 #define MNNET_IPV6_ADDRESS_NONE        		 MNNET_IPV6_ADDRESS_ANY
 
 #include "basic_ip4_address.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace net {
 		/**
 		 * @brief This class represents an internet (IP) version 6 host address.
@@ -245,10 +245,10 @@ namespace mn {
 
 			virtual void swap(basic_ip6_address& rhs) noexcept {
 				basic_ip_address::swap(rhs);
-				mn::swap<uint32_t>(as_int[0], rhs.as_int[0]);
-				mn::swap<uint32_t>(as_int[1], rhs.as_int[1]);
-				mn::swap<uint32_t>(as_int[2], rhs.as_int[2]);
-				mn::swap<uint32_t>(as_int[3], rhs.as_int[3]);
+				mofw::swap<uint32_t>(as_int[0], rhs.as_int[0]);
+				mofw::swap<uint32_t>(as_int[1], rhs.as_int[1]);
+				mofw::swap<uint32_t>(as_int[2], rhs.as_int[2]);
+				mofw::swap<uint32_t>(as_int[3], rhs.as_int[3]);
 			}
 		};
 	}

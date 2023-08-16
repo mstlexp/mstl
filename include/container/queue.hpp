@@ -22,12 +22,12 @@
 #include "../queue/mn_queue.hpp"
 #include "../algorithm.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace container {
         template <class T, class TQUEUE> 
         class basic_queue_iterator {
         public:
-            using iterator_category = mn::forward_iterator_tag;
+            using iterator_category = mofw::forward_iterator_tag;
             using value_type = T;
             using pointer = value_type*;
             using reference = value_type&;
@@ -77,10 +77,10 @@ namespace mn {
          * @tparam TMAXITEMS Maximal items can queue 
          * @tparam TITEMSIZE A size of a item
          */
-        template <class T, mn::size_t TMAXITEMS, mn::size_t TITEMSIZE = sizeof(T) > 
+        template <class T, mofw::size_t TMAXITEMS, mofw::size_t TITEMSIZE = sizeof(T) > 
         class basic_queue {
         public:
-            using queue_type = mn::queue::queue_t;
+            using queue_type = mofw::queue::queue_t;
             using value_type = T;
             using pointer = T*;
             using reference = T&;
@@ -88,7 +88,7 @@ namespace mn {
             using self_type = basic_queue<T, TMAXITEMS, TITEMSIZE>;
             using iterator = basic_queue_iterator<T, queue_type>;
             using const_iterator = const iterator;
-            using size_type = mn::size_t;
+            using size_type = mofw::size_t;
 
             /**
              * @brief Construct a new basic queue object
@@ -181,14 +181,14 @@ namespace mn {
              * @brief How many items can queue
              * @return The maximal number of entries can queue
              */
-            inline  mn::size_t length()  {
+            inline  mofw::size_t length()  {
                 return TMAXITEMS;
             }
             /**
              *  How many items are currently in the queue.
              *  @return the number of items in the queue.
              */
-            inline  mn::size_t size() {
+            inline  mofw::size_t size() {
                 return m_queue.get_num_items();
             }
 
@@ -196,7 +196,7 @@ namespace mn {
              *  How many empty spaves are currently left in the queue.
              *  @return the number of remaining spaces.
              */
-            inline  mn::size_t left()  {
+            inline  mofw::size_t left()  {
                 return m_queue.get_left();
             }
 
@@ -224,7 +224,7 @@ namespace mn {
             pointer m_pFront;
         };
 
-        template <class T, mn::size_t TMAXITEMS, mn::size_t TITEMSIZE> 
+        template <class T, mofw::size_t TMAXITEMS, mofw::size_t TITEMSIZE> 
         void swap(basic_queue<T, TMAXITEMS, TITEMSIZE>& a, 
                   basic_queue<T, TMAXITEMS, TITEMSIZE>& b) {
             a.swap(b);
@@ -235,7 +235,7 @@ namespace mn {
          * @tparam TMAXITEMS Maximal items can queue 
          * @tparam TITEMSIZE A size of a item
          */
-        template <class T, mn::size_t TMAXITEMS, mn::size_t TITEMSIZE = sizeof(T)>
+        template <class T, mofw::size_t TMAXITEMS, mofw::size_t TITEMSIZE = sizeof(T)>
         using queue = basic_queue<T, TMAXITEMS, TITEMSIZE>;
 
     }

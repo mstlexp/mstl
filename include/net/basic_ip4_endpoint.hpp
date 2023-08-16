@@ -19,18 +19,18 @@
 #define __MINILIB_NET_BASIC_IP4_ENDPOINT_H__
 
 
-#define MNNET_IPENDPOINT4_BROADCAST(PORT) 	mn::net::basic_ip4_endpoint(MNNET_IPV4_ADDRESS_BROADCAST, PORT)
-#define MNNET_IPENDPOINT4_ANY(PORT) 		mn::net::basic_ip4_endpoint(MNNET_IPV4_ADDRESS_ANY, PORT)
-#define MNNET_IPENDPOINT4_LOOPBACK(PORT)	mn::net::basic_ip4_endpoint(MNNET_IPV4_ADDRESS_LOOPBACK, PORT)
-#define MNNET_IPENDPOINT4_NONE(PORT)		mn::net::basic_ip4_endpoint(MNNET_IPV4_ADDRESS_NONE, PORT)
-#define MNNET_IPENDPOINT4(IP, PORT)			mn::net::basic_ip4_endpoint(IP, PORT)
+#define MNNET_IPENDPOINT4_BROADCAST(PORT) 	mofw::net::basic_ip4_endpoint(MNNET_IPV4_ADDRESS_BROADCAST, PORT)
+#define MNNET_IPENDPOINT4_ANY(PORT) 		mofw::net::basic_ip4_endpoint(MNNET_IPV4_ADDRESS_ANY, PORT)
+#define MNNET_IPENDPOINT4_LOOPBACK(PORT)	mofw::net::basic_ip4_endpoint(MNNET_IPV4_ADDRESS_LOOPBACK, PORT)
+#define MNNET_IPENDPOINT4_NONE(PORT)		mofw::net::basic_ip4_endpoint(MNNET_IPV4_ADDRESS_NONE, PORT)
+#define MNNET_IPENDPOINT4(IP, PORT)			mofw::net::basic_ip4_endpoint(IP, PORT)
 #define MNNET_IPENDPOINT4_EMPTY				MNNET_IPENDPOINT4_ANY(0)
 
 #include "../config.hpp"
 #include "basic_endpoint.hpp"
 #include "basic_ip4_address.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace net {
 
 		class basic_ip4_endpoint : public basic_ip_endpoint<basic_ip4_address, address_family::inet_v4> {

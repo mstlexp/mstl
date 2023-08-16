@@ -22,7 +22,7 @@
 
 #include "../container/mn_node.hpp"
 
-namespace mn {
+namespace mofw {
     namespace pointer {
 
         template <typename T, class TAllocator>

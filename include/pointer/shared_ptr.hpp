@@ -22,7 +22,7 @@
 
 #include "../def.hpp"
 
-namespace mn {
+namespace mofw {
     namespace pointer {
 
         template < typename T, typename TRefType >
@@ -63,8 +63,8 @@ namespace mn {
                 return m_ref;
             }
             void swap(self_type& b) {
-                mn::swap<pointer>(m_ptr, b.m_ptr);
-                mn::swap<ref_type >(m_ref, b.m_ref);
+                mofw::swap<pointer>(m_ptr, b.m_ptr);
+                mofw::swap<ref_type >(m_ref, b.m_ref);
             }
 
             pointer get() const {
@@ -112,7 +112,7 @@ namespace mn {
 		 */
 		template<typename T, typename... Args >
 		inline shared_ptr<T> make_shared(Args&&... args) {
-			return shared_ptr<T>(new T (mn::forward<Args>(args)...) );
+			return shared_ptr<T>(new T (mofw::forward<Args>(args)...) );
 		}
 
 		/**
@@ -122,7 +122,7 @@ namespace mn {
 		 */
 		template<typename T, typename... Args >
 		inline shared_atomic_ptr<T> make_atomic_shared(Args&&... args) {
-			return shared_atomic_ptr<T>(new T (mn::forward<Args>(args)...) );
+			return shared_atomic_ptr<T>(new T (mofw::forward<Args>(args)...) );
 		}
     }
 }

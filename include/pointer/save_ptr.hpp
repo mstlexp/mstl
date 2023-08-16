@@ -22,7 +22,7 @@
 #include "../def.hpp"
 
 
-namespace mn {
+namespace mofw {
     namespace pointer {
 
         template <typename T>
@@ -80,7 +80,7 @@ namespace mn {
 		*/
 		template<typename T, typename... Args >
 		inline save_ptr<T> make_save(Args&&... args) {
-			return save_ptr<T>(new T (mn::forward<Args>(args)...) );
+			return save_ptr<T>(new T (mofw::forward<Args>(args)...) );
 		}
 
 		/**

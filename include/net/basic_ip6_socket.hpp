@@ -24,7 +24,7 @@
 
 #if MN_THREAD_CONFIG_NET_IPADDRESS6_ENABLE == MN_THREAD_CONFIG_YES
 
-namespace mn {
+namespace mofw {
 	namespace net {
 		/**
 		 * @brief This class represents an internet (IP) version 6 host socket.
@@ -135,7 +135,7 @@ namespace mn {
 
         	virtual void swap(basic_ip6_socket& rhs) noexcept {
         		basic_ip_socket::swap(rhs);
-				mn::swap(m_pEndPoint, rhs.m_pEndPoint);
+				mofw::swap(m_pEndPoint, rhs.m_pEndPoint);
 			}
 		protected:
 			/**

@@ -24,7 +24,7 @@
 #include "algorithm.hpp"
 #include "functional.hpp"
 
-namespace mn {
+namespace mofw {
 
 	struct nullopt_t { };
 
@@ -50,16 +50,16 @@ namespace mn {
 			: m_bHasValue( other.m_bHasValue), m_tValue(other.m_tValue) { }
 
 		basic_optional(const self_type&& other) noexcept
-			: m_bHasValue( mn::move(other.m_bHasValue)), m_tValue( mn::move(other.m_tValue)) { }
+			: m_bHasValue( mofw::move(other.m_bHasValue)), m_tValue( mofw::move(other.m_tValue)) { }
 
 
 		template< typename... Args>
 		constexpr explicit basic_optional(Args&&... args)
-			: m_bHasValue( true), m_tValue( value_type( mn::forward<Args>(args)...))  {}
+			: m_bHasValue( true), m_tValue( value_type( mofw::forward<Args>(args)...))  {}
 
 		template< typename U = value_type >
     	constexpr explicit basic_optional( U && value)
-			: m_bHasValue( true), m_tValue( mn::forward<U>( value)) { }
+			: m_bHasValue( true), m_tValue( mofw::forward<U>( value)) { }
 
 		~basic_optional() { reset(); }
 
@@ -67,7 +67,7 @@ namespace mn {
     	 * @brief Resets the basic_optional.
     	 */
     	void reset() noexcept {
-        	if ( has_value() & mn::is_class<T>::value)
+        	if ( has_value() & mofw::is_class<T>::value)
             	m_tValue->~T();
 
         	m_bHasValue = false;
@@ -93,7 +93,7 @@ namespace mn {
 		 * @brief Moves a value into the basic_otional.
 		 */
 		self_type& assign(move_type value) {
-			m_tValue = mn::move(value);
+			m_tValue = mofw::move(value);
 			m_bHasValue = true;
 			return *this;
 		}
@@ -110,8 +110,8 @@ namespace mn {
     	 * @brief Swap this basic_optional with a other.
     	 */
 		void swap( self_type& other) {
-			mn::swap(m_bHasValue, other.m_bHasValue);
-			mn::swap(m_tValue, other.m_tValue);
+			mofw::swap(m_bHasValue, other.m_bHasValue);
+			mofw::swap(m_tValue, other.m_tValue);
     	}
 
     	/**
@@ -371,18 +371,18 @@ namespace mn {
 	}
 
 	template< typename T >
-	constexpr basic_optional<typename mn::decay<T>::type> make_optional( T && value ) {
-		return basic_optional<typename mn::decay<T>::type>( mn::forward<T>( value ) );
+	constexpr basic_optional<typename mofw::decay<T>::type> make_optional( T && value ) {
+		return basic_optional<typename mofw::decay<T>::type>( mofw::forward<T>( value ) );
 	}
 
 	template< typename T, typename...Args >
 	constexpr basic_optional<T> make_optional( Args&&... args ) {
-		return basic_optional<T>(mn::forward<Args>(args)...);
+		return basic_optional<T>(mofw::forward<Args>(args)...);
 	}
 #if 0
 	template< class T >
 	struct hash<basic_optional<T>> {
-		mn::size_t operator()( const basic_optional<T>& opt ) const noexcept {
+		mofw::size_t operator()( const basic_optional<T>& opt ) const noexcept {
 			return bool(opt) ? hash<T>()(*opt) : 0;
 		}
 	};

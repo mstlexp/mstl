@@ -24,7 +24,7 @@
 #include "../autolock.hpp"
 #include "../def.hpp"
 
-namespace mn {
+namespace mofw {
     namespace pointer {
         /**
          * @brief auto lock pointer.

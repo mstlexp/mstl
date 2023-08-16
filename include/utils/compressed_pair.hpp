@@ -23,7 +23,7 @@
 #include "../algorithm.hpp"
 #include "ebo_storage.hpp"
 
-namespace mn {
+namespace mofw {
 
 	/**
 	 * A simple compressed pair
@@ -64,8 +64,8 @@ namespace mn {
 		constexpr second_const_reference second() const noexcept { return m_second.get(); }
 
 		void swap(self_type& o) {
-			mn::swap(m_first,  o.m_first);
-			mn::swap(m_second, o.m_second);
+			mofw::swap(m_first,  o.m_first);
+			mofw::swap(m_second, o.m_second);
 		}
 	private:
 		ebo_storage<T, 0>  m_first;

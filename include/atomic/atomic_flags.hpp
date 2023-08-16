@@ -37,7 +37,7 @@
 #define __ATOMIC_SEQ_CST		5
 #endif
 
-namespace mn {
+namespace mofw {
      enum class memory_order : int {
         Relaxed = __ATOMIC_RELAXED,
         Consume = __ATOMIC_CONSUME,

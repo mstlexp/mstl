@@ -20,7 +20,7 @@
 
 #include "vector.hpp"
 
-namespace mn {
+namespace mofw {
     namespace container {
         template<typename T, class TAllocator, int TCapacity>
         struct fixed_vector_storage {
@@ -29,7 +29,7 @@ namespace mn {
             using value_type = T;
             using pointer = value_type*;
             using reference = value_type&;
-            using size_type = mn::size_t;
+            using size_type = mofw::size_t;
             using etype_t = typename aligned_as<value_type>::res;
 
             explicit fixed_vector_storage(const TAllocator& allocator)
@@ -46,7 +46,7 @@ namespace mn {
                 assert(!"fixed_vector cannot grow");
             }
             inline void destroy(pointer ptr, size_type n) {
-                mn::destruct_n(ptr, n);
+                mofw::destruct_n(ptr, n);
                 if ( (etype_t*)ptr != &m_data[0] )
                      m_allocator.free(ptr);
             }
@@ -76,7 +76,7 @@ namespace mn {
             using const_iterator = const pointer;
 
             using allocator_type = TAllocator;
-            using size_type = mn::size_t;
+            using size_type = mofw::size_t;
             using self_type = basic_fixed_vector<T, TCapacity, TAllocator>;
 
             explicit basic_fixed_vector(const allocator_type& allocator = allocator_type())
@@ -109,7 +109,7 @@ namespace mn {
         };
 
         template<typename T, int TCapacity>
-		using fixed_vector =  basic_fixed_vector<T, TCapacity, mn::memory::default_allocator_t>;
+		using fixed_vector =  basic_fixed_vector<T, TCapacity, mofw::memory::default_allocator_t>;
     }
 }
 

@@ -22,7 +22,7 @@
 #include "../config.hpp"
 #include "../def.hpp"
 
-namespace mn {
+namespace mofw {
 	template<class T>
 	constexpr inline T* addressof(T& o) noexcept {
 		return __builtin_addressof(o);

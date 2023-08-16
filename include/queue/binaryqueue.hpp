@@ -20,7 +20,7 @@
 
 #include "queue.hpp"
 
-namespace mn {
+namespace mofw {
     namespace queue {
         /**
          * @brief Binary queue with overwrite. This queue can only hold one item.

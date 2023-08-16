@@ -357,11 +357,11 @@ TOC_INCLUDE_HEADINGS   = 5
 
 AUTOLINK_SUPPORT       = YES
 
-# If you use STL classes (i.e. mn::string, mn::vector, etc.) but do not want
+# If you use STL classes (i.e. mofw::string, mofw::vector, etc.) but do not want
 # to include (a tag file for) the STL sources as input, then you should set this
 # tag to YES in order to let doxygen match functions declarations and
-# definitions whose arguments contain STL classes (e.g. func(mn::string);
-# versus func(mn::string) {}). This also make the inheritance and collaboration
+# definitions whose arguments contain STL classes (e.g. func(mofw::string);
+# versus func(mofw::string) {}). This also make the inheritance and collaboration
 # diagrams that involve STL classes more complete and accurate.
 # The default value is: NO.
 

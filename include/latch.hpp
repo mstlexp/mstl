@@ -23,7 +23,7 @@
 #include "atomic.hpp"
 
 
-namespace mn {
+namespace mofw {
     class latch {
     public:
         static constexpr ptrdiff_t max() { return UINT64_MAX; }

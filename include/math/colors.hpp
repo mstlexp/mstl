@@ -21,7 +21,7 @@
 
 #include "color.hpp"
 
-namespace mn {
+namespace mofw {
     namespace math {
         enum class color_name : unsigned int {
             AliceBlue = 0xF0F8FFFF,

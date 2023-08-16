@@ -34,7 +34,7 @@
 #include "../utils/mn_utils.hpp"
 
 
-namespace mn {
+namespace mofw {
 	namespace container {
 
 
@@ -60,8 +60,8 @@ namespace mn {
 			using iterator = T*;
 			using const_iterator = const T*;
 
-			using size_type = mn::size_t;
-			using difference_type = mn::ptrdiff_t;
+			using size_type = mofw::size_t;
+			using difference_type = mofw::ptrdiff_t;
 
 			basic_fixed_array() { if(is_pointer<T>::value) fill(nullptr); else fill(T()); }
 			basic_fixed_array(const value_type& val) 	{ fill(val); }
@@ -90,7 +90,7 @@ namespace mn {
 			const_reference at(size_type pos) const 	{ return m_nData[pos]; }
 
 			void fill(const value_type& val) {
-				mn::fill_n<value_type>(begin(), N, val);
+				mofw::fill_n<value_type>(begin(), N, val);
 			}
 
 			void swap(self_type& other) noexcept  {

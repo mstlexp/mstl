@@ -34,7 +34,7 @@
 #include "../utils/utils.hpp"
 #include "pair.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace container {
 
 		template<typename TArray>
@@ -66,8 +66,8 @@ namespace mn {
 			using pointer = T*;
 			using reference = T&;
 			using const_reference = const T&;
-			using difference_type = mn::ptrdiff_t;
-			using size_type = mn::size_t;
+			using difference_type = mofw::ptrdiff_t;
+			using size_type = mofw::size_t;
 
 			using self_type = basic_array_iterator<T>;
 
@@ -78,7 +78,7 @@ namespace mn {
 				: m_valuePtr(other.m_valuePtr), m_iPosition(other.m_iPosition) { }
 
 			basic_array_iterator(const self_type&& other) noexcept
-				: m_valuePtr(mn::move(other.m_valuePtr)), m_iPosition(mn::move(other.m_iPosition)) { }
+				: m_valuePtr(mofw::move(other.m_valuePtr)), m_iPosition(mofw::move(other.m_iPosition)) { }
 
 			bool operator != (const self_type& other) const {
 				return !(*this == other);
@@ -124,15 +124,15 @@ namespace mn {
 		 * @brief Lightweight c++11 array implementation.
 		 */
 		template <typename T, class TAllocator = memory::default_allocator,
-			class TDeleter = mn::memory::default_delete<T, TAllocator> >
+			class TDeleter = mofw::memory::default_delete<T, TAllocator> >
 		class basic_array {
 		public:
 			using value_type = T;
 			using pointer = T*;
 			using reference = T&;
 			using const_reference = const T&;
-			using difference_type = mn::ptrdiff_t;
-			using size_type = mn::size_t;
+			using difference_type = mofw::ptrdiff_t;
+			using size_type = mofw::size_t;
 			using allocator_type = TAllocator;
 			using deleter_type = TDeleter;
 			using iterator = basic_array_iterator<T>;
@@ -253,17 +253,17 @@ namespace mn {
       			return m_arData[pos]; }
 
 			void fill(const value_type& val) {
-				mn::fill_n<value_type>(begin(), size(), val);
+				mofw::fill_n<value_type>(begin(), size(), val);
 			}
 		private:
 			pointer construct(size_type n) {
-				void* _mem = m_alloCator.allocate(n, TypeSize, mn::alignment_for(n * TypeSize) );
+				void* _mem = m_alloCator.allocate(n, TypeSize, mofw::alignment_for(n * TypeSize) );
 				//return (pointer*)_val;
 
 				return new (_mem) value_type[n];
 			}
 			void deconstruct (pointer ptr, size_type size) {
-				m_alloCator.deallocate(ptr, size, TypeSize, mn::alignment_for(size * TypeSize) );
+				m_alloCator.deallocate(ptr, size, TypeSize, mofw::alignment_for(size * TypeSize) );
 			}
 		private:
 			pointer 	m_arData;
@@ -291,7 +291,7 @@ namespace mn {
  		template <typename T, class TAllocator, class TDeleter >
 		inline bool  operator < (const basic_array<T, TAllocator, TDeleter>& a,
 								 const basic_array<T, TAllocator, TDeleter>& b) {
-			for(int i = 0; i < mn::min(a.size(), b.size()); i++)
+			for(int i = 0; i < mofw::min(a.size(), b.size()); i++)
 				if(a[i] >= b[i]) return false;
 			return true;
 		}
@@ -299,7 +299,7 @@ namespace mn {
 		template <typename T, class TAllocator, class TDeleter >
 		inline bool  operator <= (const basic_array<T, TAllocator, TDeleter>& a,
 								  const basic_array<T, TAllocator, TDeleter>& b) {
-			for(int i = 0; i < mn::min(a.size(), b.size()); i++)
+			for(int i = 0; i < mofw::min(a.size(), b.size()); i++)
 				if(a[i] > b[i]) return false;
 			return true;
 		}
@@ -307,7 +307,7 @@ namespace mn {
 		template <typename T, class TAllocator, class TDeleter >
 		inline bool  operator > (const basic_array<T, TAllocator, TDeleter>& a,
 								 const basic_array<T, TAllocator, TDeleter>& b) {
-			for(int i = 0; i < mn::min(a.size(), b.size()); i++)
+			for(int i = 0; i < mofw::min(a.size(), b.size()); i++)
 				if(a[i] <= b[i]) return false;
 			return true;
 		}
@@ -315,7 +315,7 @@ namespace mn {
 		template <typename T, class TAllocator, class TDeleter >
 		inline bool  operator >= (const basic_array<T, TAllocator, TDeleter>& a,
 								  const basic_array<T, TAllocator, TDeleter>& b) {
-			for(int i = 0; i < mn::min(a.size(), b.size()); i++)
+			for(int i = 0; i < mofw::min(a.size(), b.size()); i++)
 				if(a[i] < b[i]) return false;
 			return true;
 		}
@@ -339,7 +339,7 @@ namespace mn {
 
 		template <typename T,
 		          class TAllocator = memory::default_allocator,
-				  class TDeleter = mn::memory::default_delete<T, TAllocator> >
+				  class TDeleter = mofw::memory::default_delete<T, TAllocator> >
 		using array = basic_array<T, TAllocator, TDeleter>;
 	}
 }

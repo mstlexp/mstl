@@ -22,7 +22,7 @@
 #include "config.hpp"
 #include "container/list.hpp"
 
-namespace mn {
+namespace mofw {
 
 	class auto_release_object {
 	public:
@@ -46,7 +46,7 @@ namespace mn {
 		using value_type = TRELOBJ;
 		using pointer = TRELOBJ*;
 		using reference = TRELOBJ&;
-		using list_type = mn::container::list<TRELOBJ, TALLOCATOR>;
+		using list_type = mofw::container::list<TRELOBJ, TALLOCATOR>;
 
 		auto_release() { }
 		/**

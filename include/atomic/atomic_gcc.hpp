@@ -51,14 +51,14 @@
 #define	ATOMIC_POINTER_LOCK_FREE	__GCC_ATOMIC_POINTER_LOCK_FREE
 #endif
 
-namespace mn {
+namespace mofw {
     /**
      *  @brief Generic atomic type, primary class template.
      *  @tparam T  Type to be made atomic, must be trivally copyable.
      */
     template <typename T >
     struct basic_atomic_gcc {
-        static_assert(__is_trivially_copyable(T),"mn::atomic requires a trivially copyable type");
+        static_assert(__is_trivially_copyable(T),"mofw::atomic requires a trivially copyable type");
         static_assert(sizeof(T) > 0, "Incomplete or zero-sized types are not supported");
 
         static constexpr bool is_always_lock_free  = __atomic_always_lock_free(sizeof(T), 0);

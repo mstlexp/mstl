@@ -33,7 +33,7 @@
 #include "initializer_list.hpp"
 
 
-namespace mn {
+namespace mofw {
 
 	inline size_t popcount (uint32_t v)	{
 		return __builtin_popcount (v);
@@ -48,7 +48,7 @@ namespace mn {
 
 	MN_TEMPLATE_FULL_DECL_ONE(typename, T)
     inline void  copy_construct(T* mem, const T&& orig) {
-	        internal::copy_construct(mem, mn::move(orig), int_to_type <has_trivial_copy<T>::value> ());
+	        internal::copy_construct(mem, mofw::move(orig), int_to_type <has_trivial_copy<T>::value> ());
 	}
 
 	MN_TEMPLATE_FULL_DECL_ONE(typename, T)
@@ -111,7 +111,7 @@ namespace mn {
 
 	template <typename T>
 	inline T* copy_backward (const T* first, const T* last, T* result) noexcept {
-		const size_t nBytes (mn::distance (first, last));
+		const size_t nBytes (mofw::distance (first, last));
 		memmove (advance_ptr(result,-nBytes), first, nBytes);
 	}
 
@@ -156,19 +156,19 @@ namespace mn {
 	}
 
 
-	MN_TEMPLATE_FULL_DECL_TWO(class, TIter, class, TPred = mn::less<TIter> )
+	MN_TEMPLATE_FULL_DECL_TWO(class, TIter, class, TPred = mofw::less<TIter> )
 	constexpr TIter lower_bound (TIter first, TIter last, const TPred& value) {
 		TIter mid;
 		while (first != last) {
 
-			mid = first + size_t(mn::distance (first,last))/2;
+			mid = first + size_t(mofw::distance (first,last))/2;
 			if (value < *mid) first = mid + 1;
 			else last = mid;
 		}
 		return last;
 	}
 
-	MN_TEMPLATE_FULL_DECL_THREE(class, TIter, typename, T, class, TPred = mn::less<TIter> )
+	MN_TEMPLATE_FULL_DECL_THREE(class, TIter, typename, T, class, TPred = mofw::less<TIter> )
     constexpr TIter lower_bound(TIter src, TIter last, const T& val, const TPred& pred) {
 	        internal::test_ordering(src, last, pred);
 	        int dist(0);
@@ -187,19 +187,19 @@ namespace mn {
 	}
 
 
-	MN_TEMPLATE_FULL_DECL_TWO(class, TIter, class, TPred = mn::less<TIter> )
+	MN_TEMPLATE_FULL_DECL_TWO(class, TIter, class, TPred = mofw::less<TIter> )
 	constexpr TIter upper_bound (TIter first, TIter last, const TPred& value) {
 		TIter mid;
 		while (first != last) {
 
-			mid = first + size_t(mn::distance (first,last))/2;
+			mid = first + size_t(mofw::distance (first,last))/2;
 			if (value < *mid) last = mid;
 			else first = mid + 1;
 		}
 		return last;
 	}
 
-	MN_TEMPLATE_FULL_DECL_THREE(class, TIter, typename, T, class, TPred = mn::less<TIter>)
+	MN_TEMPLATE_FULL_DECL_THREE(class, TIter, typename, T, class, TPred = mofw::less<TIter>)
     constexpr TIter upper_bound(TIter src, TIter last, const T& val, const TPred& pred) {
 	        internal::test_ordering(src, last, pred);
 	        int dist(0);
@@ -219,7 +219,7 @@ namespace mn {
 
 	template <typename TIter, typename TComp>
 	inline constexpr bool binary_search (TIter first, TIter last, const TComp& value) {
-		TIter found = mn::lower_bound (first, last, value);
+		TIter found = mofw::lower_bound (first, last, value);
 		return found != last && !(value < *found);
 	}
 
@@ -235,7 +235,7 @@ namespace mn {
         return last;
 	}
 
-	MN_TEMPLATE_FULL_DECL_THREE(class ,TIter, typename, T, class, TPred = mn::less<TIter>)
+	MN_TEMPLATE_FULL_DECL_THREE(class ,TIter, typename, T, class, TPred = mofw::less<TIter>)
     TIter find_if(TIter src, TIter last, const T& val, const TPred& pred) {
         while (src != last) {
             if (pred(*src, val))
@@ -310,34 +310,34 @@ namespace mn {
 
 	MN_TEMPLATE_FULL_DECL_ONE(typename, TAssignable)
     void swap(TAssignable& a, TAssignable& b) {
-        TAssignable tmp = mn::move(a);
+        TAssignable tmp = mofw::move(a);
 
-        a = mn::move(b);
-        b = mn::move(tmp);
+        a = mofw::move(b);
+        b = mofw::move(tmp);
 	}
 
 	MN_TEMPLATE_FULL_DECL_TWO(typename, TAssignable, size_t, N)
     inline void swap(TAssignable (&x)[N], TAssignable (&y)[N]) {
       for (size_t i = 0; i < N; i++)
-			mn::swap(x[i], y[i]);
+			mofw::swap(x[i], y[i]);
     }
 
 	MN_TEMPLATE_FULL_DECL_TWO(typename, fIt1, typename, fIt2 )
     inline void iter_swap(fIt1 a, fIt2 b) {
-      mn::swap(*a, *b);
+      mofw::swap(*a, *b);
     }
 
 	MN_TEMPLATE_FULL_DECL_TWO(typename, fIt1, typename, fIt2 )
     fIt2 swap_ranges(fIt1 a, fIt1 b, fIt2 c) {
 		for (; a != b; ++a, ++c)
-			mn::iter_swap(*a, *c);
+			mofw::iter_swap(*a, *c);
 		return c;
     }
 
     template <typename TRandomAccessIterator, typename TRandFunc>
 	void random_shuffle (TRandomAccessIterator first, TRandomAccessIterator last, const TRandFunc& func) {
 		for (; first != last; ++ first)
-			mn::iter_swap (first, first + (func() % distance (first, last)));
+			mofw::iter_swap (first, first + (func() % distance (first, last)));
 	}
 
     MN_TEMPLATE_FULL_DECL_ONE(typename, T)

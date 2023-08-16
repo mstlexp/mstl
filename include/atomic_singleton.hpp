@@ -27,7 +27,7 @@
 #include "copyable.hpp"
 
 
-namespace mn {
+namespace mofw {
 
 	/**
 	 * @brief Singleton with double-checked locking pattern with atomic and mutex lock
@@ -59,15 +59,15 @@ namespace mn {
 			return tmp;
 		}
 	private:
-		static mn::_atomic<pointer> m_pInstance;
-        static mn::mutex_t  m_tLock;
+		static mofw::_atomic<pointer> m_pInstance;
+        static mofw::mutex_t  m_tLock;
 	};
 
 	template < typename T >
-    mn::_atomic<T*> basic_atomic_singleton<T>::m_pInstance;
+    mofw::_atomic<T*> basic_atomic_singleton<T>::m_pInstance;
 
     template < typename T >
-    mn::mutex_t basic_atomic_singleton<T>::m_tLock;
+    mofw::mutex_t basic_atomic_singleton<T>::m_tLock;
 
 	template <typename T>
 	using atomic_singleton = basic_atomic_singleton<T>;

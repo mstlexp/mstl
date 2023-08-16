@@ -22,17 +22,17 @@
 
 #if MN_THREAD_CONFIG_NET_IPADDRESS6_ENABLE == MN_THREAD_CONFIG_YES
 
-#define MNNET_IPENDPOINT6_ANY(PORT) 		mn::net::basic_ip6_endpoint(MNNET_IPV6_ADDRESS_ANY, PORT)
-#define MNNET_IPENDPOINT6_LOOPBACK(PORT)	mn::net::basic_ip6_endpoint(MNNET_IPV6_ADDRESS_LOOPBACK, PORT)
+#define MNNET_IPENDPOINT6_ANY(PORT) 		mofw::net::basic_ip6_endpoint(MNNET_IPV6_ADDRESS_ANY, PORT)
+#define MNNET_IPENDPOINT6_LOOPBACK(PORT)	mofw::net::basic_ip6_endpoint(MNNET_IPV6_ADDRESS_LOOPBACK, PORT)
 
-#define MNNET_IPENDPOINT6(IP, PORT)			mn::net::basic_ip6_endpoint(IP, PORT)
+#define MNNET_IPENDPOINT6(IP, PORT)			mofw::net::basic_ip6_endpoint(IP, PORT)
 #define MNNET_IPENDPOINT6_EMPTY				MNNET_IPENDPOINT4_ANY(0)
 
 
 #include "basic_endpoint.hpp"
 #include "basic_ip6_address.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace net {
 		/**
 		 * @brief This class represents an IPv6 endpoint/socket address.

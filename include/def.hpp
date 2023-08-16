@@ -40,7 +40,7 @@
 /// Returns the mask of type \p t with the lowest \p n bits set.
 #define BitMask(t,n)	(t(~t(0)) >> (BitsInType(t) - (n)))
 
-namespace mn {
+namespace mofw {
     using max_align_t 	= uintptr_t;
     using nullptr_t 	= decltype(nullptr);
     using addrof_null_t = nullptr_t ;

@@ -24,7 +24,7 @@
 #include "atomic.hpp"
 #include "lock.hpp"
 
-namespace mn {
+namespace mofw {
 
 	/**
 	 * @brief This class implements a simple spinlack, whit atomic operations.
@@ -58,7 +58,7 @@ namespace mn {
          */
         virtual int lock(unsigned int not_use = 0) {
             while(! m_locked.compare_exchange_t(false, true,
-                mn::memory_order::Acquire) ) { }
+                mofw::memory_order::Acquire) ) { }
             return 0;
         }
 
@@ -69,7 +69,7 @@ namespace mn {
          *  unlock (give) a atomic_spinlock.
          */
         virtual int unlock() {
-            m_locked.store(false, mn::memory_order::Release);
+            m_locked.store(false, mofw::memory_order::Release);
             return 0;
         }
         /**

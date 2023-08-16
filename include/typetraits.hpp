@@ -25,7 +25,7 @@
  * @author Amber-Sophia Schröck
  * @date 2021.02.14
  */
-namespace mn {
+namespace mofw {
 	template <typename T>
 	struct type_traits {
 		using value_type = T;

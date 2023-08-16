@@ -23,7 +23,7 @@
 #include "basic_allocator.hpp"
 #include "allocator_typetraits.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace memory {
 
 		/**

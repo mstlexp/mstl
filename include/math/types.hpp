@@ -27,10 +27,10 @@
 #include <mn_algorithm.hpp>
 
 
-namespace mn {
+namespace mofw {
 	namespace math {
 		/**
-		 * @brief Basic template for all mn::math using vector types.
+		 * @brief Basic template for all mofw::math using vector types.
 		 * @tparam TTYPE type for the vector
 		 * @tparam TSIZE The dimension of the vector type.
 		 */
@@ -45,7 +45,7 @@ namespace mn {
 		};
 
 		/**
-		 * @brief Basic template for 1-Dimonsen mn::math using vector types.
+		 * @brief Basic template for 1-Dimonsen mofw::math using vector types.
 		 * @tparam TTYPE type for the vector.
 		 */
 		template <typename TTYPE>
@@ -75,7 +75,7 @@ namespace mn {
 			vec1x(value_type* comp) : x(comp[0]) { }
 
 			vec1x(const self_type& other) : x(other.x) { }
-			vec1x(const self_type&& other) : x(mn::move(other.x)) { }
+			vec1x(const self_type&& other) : x(mofw::move(other.x)) { }
 
 			/**
 			 * @brief Swaps the content of the two Anys.
@@ -83,7 +83,7 @@ namespace mn {
 			self_type& swap( self_type& other ) noexcept {
 				if (this == &other) return *this;
 
-        		mn::swap( x, other.x );
+        		mofw::swap( x, other.x );
         		return *this;
     		}
 
@@ -117,7 +117,7 @@ namespace mn {
 			 * @brief Assignment operator for 1D vector.
 			 */
     		self_type& operator=( self_type && other ) noexcept {
-				self_type( mn::move( other ) ).swap( *this );
+				self_type( mofw::move( other ) ).swap( *this );
 				return *this;
 			}
 
@@ -202,7 +202,7 @@ namespace mn {
 		using vec1d = vec1x<double>;
 
 		/**
-		 * @brief Basic template for 2D mn::math using vector types.
+		 * @brief Basic template for 2D mofw::math using vector types.
 		 * @tparam TTYPE type for the vector.
 		 */
 		template <typename TTYPE>
@@ -234,7 +234,7 @@ namespace mn {
 			vec2x(value_type* comp) : x(comp[0]), y(comp[1]) { }
 
 			vec2x(const self_type& other) : x(other.x), y(other.y) { }
-			vec2x(const self_type&& other) : x(mn::move(other.x)), y(mn::move(other.y)) { }
+			vec2x(const self_type&& other) : x(mofw::move(other.x)), y(mofw::move(other.y)) { }
 
 			/**
 			 * @brief Swaps the content of the two Anys.
@@ -242,8 +242,8 @@ namespace mn {
 			self_type& swap( self_type& other ) noexcept {
 				if (this == &other) return *this;
 
-        		mn::swap( x, other.x );
-        		mn::swap( y, other.y );
+        		mofw::swap( x, other.x );
+        		mofw::swap( y, other.y );
         		return *this;
     		}
 
@@ -277,7 +277,7 @@ namespace mn {
 			 * @brief Assignment operator for 1D vector.
 			 */
     		self_type& operator=( self_type && other ) noexcept {
-				self_type( mn::move( other ) ).swap( *this );
+				self_type( mofw::move( other ) ).swap( *this );
 				return *this;
 			}
 
@@ -362,7 +362,7 @@ namespace mn {
 		using vec2d = vec2x<double>;
 
 		/**
-		 * @brief Basic template for 3D mn::math using vector types.
+		 * @brief Basic template for 3D mofw::math using vector types.
 		 * @tparam TTYPE type for the vector.
 		 */
 		template <typename TTYPE>
@@ -396,7 +396,7 @@ namespace mn {
 			vec3x(value_type* comp) : x(comp[0]), y(comp[1]), z(comp[2]) { }
 
 			vec3x(const self_type& other) : x(other.x), y(other.y), z(other.z) { }
-			vec3x(const self_type&& other) : x(mn::move(other.x)), y(mn::move(other.y)), z(mn::move(other.z)) { }
+			vec3x(const self_type&& other) : x(mofw::move(other.x)), y(mofw::move(other.y)), z(mofw::move(other.z)) { }
 
 			/**
 			 * @brief Swaps the content of the two Anys.
@@ -404,9 +404,9 @@ namespace mn {
 			self_type& swap( self_type& other ) noexcept {
 				if (this == &other) return *this;
 
-        		mn::swap( x, other.x );
-        		mn::swap( y, other.y );
-        		mn::swap( z, other.z );
+        		mofw::swap( x, other.x );
+        		mofw::swap( y, other.y );
+        		mofw::swap( z, other.z );
         		return *this;
     		}
 
@@ -440,7 +440,7 @@ namespace mn {
 			 * @brief Assignment operator for 1D vector.
 			 */
     		self_type& operator=( self_type && other ) noexcept {
-				self_type( mn::move( other ) ).swap( *this );
+				self_type( mofw::move( other ) ).swap( *this );
 				return *this;
 			}
 
@@ -525,7 +525,7 @@ namespace mn {
 		using vec3d = vec3x<double>;
 
 		/**
-		 * @brief Basic template for 4D mn::math using vector types.
+		 * @brief Basic template for 4D mofw::math using vector types.
 		 * @tparam TTYPE type for the vector.
 		 */
 		template <typename TTYPE>
@@ -561,8 +561,8 @@ namespace mn {
 			vec4x(value_type* comp) : x(comp[0]), y(comp[1]), z(comp[2]), w(comp[3]) { }
 
 			vec4x(const self_type& other) : x(other.x), y(other.y), z(other.z) { }
-			vec4x(const self_type&& other) : x(mn::move(other.x)), y(mn::move(other.y)),
-											 z(mn::move(other.z)), w(mn::move(other.w)) { }
+			vec4x(const self_type&& other) : x(mofw::move(other.x)), y(mofw::move(other.y)),
+											 z(mofw::move(other.z)), w(mofw::move(other.w)) { }
 
 			/**
 			 * @brief Swaps the content of the two Anys.
@@ -570,10 +570,10 @@ namespace mn {
 			self_type& swap( self_type& other ) noexcept {
 				if (this == &other) return *this;
 
-        		mn::swap( x, other.x );
-        		mn::swap( y, other.y );
-        		mn::swap( z, other.z );
-        		mn::swap( w, other.w );
+        		mofw::swap( x, other.x );
+        		mofw::swap( y, other.y );
+        		mofw::swap( z, other.z );
+        		mofw::swap( w, other.w );
         		return *this;
     		}
 
@@ -607,7 +607,7 @@ namespace mn {
 			 * @brief Assignment operator for 1D vector.
 			 */
     		self_type& operator=( self_type && other ) noexcept {
-				self_type( mn::move( other ) ).swap( *this );
+				self_type( mofw::move( other ) ).swap( *this );
 				return *this;
 			}
 

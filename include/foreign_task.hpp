@@ -24,7 +24,7 @@
 
 #if MN_THREAD_CONFIG_FOREIGIN_TASK_SUPPORT == MN_THREAD_CONFIG_YES
 
-namespace mn {
+namespace mofw {
     namespace ext {
       /**
        * Get the idle task for the current CPU.

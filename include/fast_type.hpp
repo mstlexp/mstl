@@ -28,7 +28,7 @@
 
 #include <stdint.h>
 
-namespace mn {
+namespace mofw {
     /**
      * This class is a fast bit for all fast_types
      */

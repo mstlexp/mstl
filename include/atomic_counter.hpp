@@ -25,7 +25,7 @@
 #include "atomic.hpp"
 #include "copyable.hpp"
 
-namespace mn {
+namespace mofw {
 
 	/**
 	 * @brief This class implements a simple counter, whit atomic operations

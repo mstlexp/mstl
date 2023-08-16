@@ -20,7 +20,7 @@
 
 #include "queue.hpp"
 
-namespace mn {
+namespace mofw {
     namespace queue {
         /**
          *  A deque class that implements a double ended queue.

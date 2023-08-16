@@ -22,7 +22,7 @@
 #include "../string.hpp"
 #include "../algorithm.hpp"
 
-namespace mn {
+namespace mofw {
     namespace math {
 
         /**
@@ -132,8 +132,8 @@ namespace mn {
 	        self_type& operator /= (const self_type& c)	{r /= c.r; g /= c.g; b /= c.b; a /= c.a; return *this;}
 	        self_type& operator /= (const value_type f)	{r /= f; g /= f; b /= f; a /= f; return *this;}
        
-            virtual mn::string to_string() {
-                return mn::frmstring("Color: R:%d G:%d B:%d A:%d", red, green, blue, alpha);
+            virtual mofw::string to_string() {
+                return mofw::frmstring("Color: R:%d G:%d B:%d A:%d", red, green, blue, alpha);
             }
 
             operator unsigned long ()  {
@@ -218,7 +218,7 @@ namespace mn {
          */
         template <typename T>
         inline basic_color<T> min(const basic_color<T>& c1, const basic_color<T>& c2) {
-            return basic_color<T>(mn::min<T>(c1.r, c2.r), mn::min<T>(c1.g, c2.g), mn::min<T>(c1.b, c2.b), mn::min<T>(c1.a, c2.a));}
+            return basic_color<T>(mofw::min<T>(c1.r, c2.r), mofw::min<T>(c1.g, c2.g), mofw::min<T>(c1.b, c2.b), mofw::min<T>(c1.a, c2.a));}
         
         /**
          * @brief Get the max color
@@ -226,7 +226,7 @@ namespace mn {
          */
         template <typename T>
         inline basic_color<T> max(const basic_color<T>& c1, const basic_color<T>& c2) {
-            return basic_color<T>(mn::max<T>(c1.r, c2.r), mn::max<T>(c1.g, c2.g), mn::max<T>(c1.b, c2.b), mn::max<T>(c1.a, c2.a));}
+            return basic_color<T>(mofw::max<T>(c1.r, c2.r), mofw::max<T>(c1.g, c2.g), mofw::max<T>(c1.b, c2.b), mofw::max<T>(c1.a, c2.a));}
         
         /**
          * @brief Create a RGBA color object from a yuv
@@ -273,7 +273,7 @@ namespace mn {
 
         using color = basic_color<float>;
     }
-} // namespace mn
+} // namespace mofw
 
 
 #endif

@@ -29,7 +29,7 @@
 #include "atomic/atomic_primary_types.hpp"
 
 
-namespace mn {
+namespace mofw {
 
 
     template<typename T>

@@ -22,7 +22,7 @@
 #include "basic_socket.hpp"
 #include "basic_ip4_endpoint.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace net {
 		/**
 		 * @brief This class represents an internet (IP) version 4 host socket.
@@ -133,7 +133,7 @@ namespace mn {
 
         	virtual void swap(basic_ip4_socket& rhs) noexcept {
         		basic_ip_socket::swap(rhs);
-				mn::swap(m_pEndPoint, rhs.m_pEndPoint);
+				mofw::swap(m_pEndPoint, rhs.m_pEndPoint);
 			}
 		protected:
 			/**

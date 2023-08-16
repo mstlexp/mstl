@@ -20,7 +20,7 @@
 
 #include "system_lock.hpp"
 
-namespace mn {
+namespace mofw {
     namespace system {
         /**
          * This class is a lock helper for disable and enable the interrupts 

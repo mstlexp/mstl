@@ -25,15 +25,15 @@
 #include "container/pair.hpp"
 #include "container/triple.hpp"
 
-namespace mn {
+namespace mofw {
     template<typename TIterator, typename UIterator, typename TCategory>
-    class basic_iterator_pair : public mn::container::pair<TIterator, UIterator> {
+    class basic_iterator_pair : public mofw::container::pair<TIterator, UIterator> {
     private:
-        using base_type = mn::container::pair<TIterator, UIterator>;
+        using base_type = mofw::container::pair<TIterator, UIterator>;
     public:
         using iterator_category = TCategory ;
         using value_type = void;
-        using traits_type = mn::iterator_traits<TIterator> ;
+        using traits_type = mofw::iterator_traits<TIterator> ;
         using difference_type = typename traits_type::difference_type ;
         using self_type = basic_iterator_pair<TIterator, UIterator, TCategory>;
         using pointer = self_type*;
@@ -91,13 +91,13 @@ namespace mn {
 
 
     template<typename TIterator, typename UIterator, typename VIterator, typename TCategory>
-    class basic_iterator_triple : public mn::container::triple<TIterator, UIterator, VIterator> {
+    class basic_iterator_triple : public mofw::container::triple<TIterator, UIterator, VIterator> {
     private:
-        using base_type = mn::container::triple<TIterator, UIterator, VIterator>;
+        using base_type = mofw::container::triple<TIterator, UIterator, VIterator>;
     public:
         using iterator_category = TCategory ;
         using value_type = void;
-        using traits_type = mn::iterator_traits<TIterator> ;
+        using traits_type = mofw::iterator_traits<TIterator> ;
         using difference_type = typename traits_type::difference_type ;
         using self_type = basic_iterator_pair<TIterator, UIterator, TCategory, VIterator>;
         using pointer = self_type*;

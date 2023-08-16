@@ -21,7 +21,7 @@
 
 #include "config.hpp"
 
-namespace mn {
+namespace mofw {
     /**
      * Basic Interface for all timers in the library
      */

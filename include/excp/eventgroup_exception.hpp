@@ -25,7 +25,7 @@
 #include <exception>
 
 
-namespace mn {
+namespace mofw {
 	namespace error {
 		class eventgroup_exception : public std::exception {
 		public:

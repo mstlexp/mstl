@@ -21,7 +21,7 @@
 #ifndef __MINILIB_INITIALIZER_LIST_H__
 #define __MINILIB_INITIALIZER_LIST_H__
 
-namespace mn {
+namespace mofw {
 	template <typename T>
 	class basic_initializer_list	 {
 	public:
@@ -30,7 +30,7 @@ namespace mn {
 		using const_reference = const T&;
 		using pointer = T*;
 		using const_pointer = const T*;
-		using size_type = mn::size_t;
+		using size_type = mofw::size_t;
 		using iterator = T*;
 		using const_iterator = const T*;
 

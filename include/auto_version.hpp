@@ -1,7 +1,7 @@
 #ifndef _MINLIB_AUTO_VERSION_H_
 #define _MINLIB_AUTO_VERSION_H_
 
-namespace mn{
+namespace mofw{
 
 	//Date Version Types
 	#define MN_VERSION_DATE "26"

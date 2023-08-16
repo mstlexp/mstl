@@ -21,7 +21,7 @@
 #include "../config.hpp"
 #include "basic_dgram_socket.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace net {
 		/**
 		 * @brief A multicast_ip_socket is a special dgram_ip_socket

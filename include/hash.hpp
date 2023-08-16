@@ -26,8 +26,8 @@
 #include "def.hpp"
 
 
-namespace mn {
-	using result_type = mn::size_t;
+namespace mofw {
+	using result_type = mofw::size_t;
 
 	/**
 	 * @brief Default implementations, just casts to hash_value.
@@ -161,7 +161,7 @@ namespace mn {
     template <class T>
 	struct hash_function {
 		result_type operator () (T key, size_t maxValue) const noexcept {
-			return mn::hash<T>{}(key) % maxValue;
+			return mofw::hash<T>{}(key) % maxValue;
 		}
 	};
 
@@ -169,7 +169,7 @@ namespace mn {
 	template <>
 	struct hash_function<const char*> {
 		result_type operator () (const char* key, size_t maxValue) const noexcept {
-			return mn::hash<const char*>{}(key) % maxValue;
+			return mofw::hash<const char*>{}(key) % maxValue;
 		}
 	};
 }

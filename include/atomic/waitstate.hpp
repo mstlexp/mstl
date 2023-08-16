@@ -21,12 +21,12 @@
 #include "../task.hpp"
 #include "atomic_flags.hpp"
 
-namespace mn {
+namespace mofw {
     template <class TTYPE /* =  basic_atomic_impl<uint64_t>*/ >
     struct basic_wait_state {
         TTYPE m_waiters{0};
         mutex_t m_locked;
-        mn::ext::convar_t m_convar;
+        mofw::convar_t m_convar;
         uint64_t m_version;
 
         // Get the wait state for a given address.
@@ -53,7 +53,7 @@ namespace mn {
                 taskYIELD();
             }
 
-            m_waiters.fetch_add(1, mn::memory_order::SeqCst);
+            m_waiters.fetch_add(1, mofw::memory_order::SeqCst);
 
             uint64_t prev = [&] {
                 m_locked.lock(timeout);
@@ -70,7 +70,7 @@ namespace mn {
                 }
                 prev = m_version;
             }
-            m_waiters.fetch_sub(1, mn::memory_order::Release);
+            m_waiters.fetch_sub(1, mofw::memory_order::Release);
         }
     };
 }

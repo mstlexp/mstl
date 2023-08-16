@@ -22,7 +22,7 @@
 #include "../allocator.hpp"
 #include "../deleter.hpp"
 
-namespace mn {
+namespace mofw {
     namespace container {
 
         template <class TNODE>

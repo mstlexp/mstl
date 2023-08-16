@@ -27,7 +27,7 @@
 
 #include "multi_heap.h"
 
-namespace mn {
+namespace mofw {
 	namespace memory {
 
 		template<size_t TBytes>

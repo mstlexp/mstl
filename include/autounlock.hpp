@@ -21,25 +21,24 @@
 
 #include "autolock.hpp"
 
-namespace mn {
+namespace mofw {
   /**
    * A auto unlock type for counting_semaphore_t objects
    */
-  using autouncsemp_t = basic_autounlock<counting_semaphore_t>;
+  using autouncsemp_t = basic_autounlock<counting_semaphore>;
 
   /**
    * A auto unlock type for binary_semaphore_t objects
    */
-  using autounbinsemp_t = basic_autounlock<binary_semaphore_t>;
+  using autounbinsemp_t = basic_autounlock<binary_semaphore>;
 
   /**
    * A auto unlock type for mutex_t objects
    */
-  using autounmutx_t = basic_autounlock<mutex_t>;
+  using autounmutx_t = basic_autounlock<basic_mutex>;
 
-  #if (MN_THREAD_CONFIG_RECURSIVE_MUTEX == MN_THREAD_CONFIG_YES)
-  //using autounremutx_t = basic_autounlock<remutex_t>;
-  #endif
+  using autounremutx_t = basic_autounlock<basic_recursive_mutex>;
+ 
 
 
   using unlock_t = basic_autounlock<LockType_t>;

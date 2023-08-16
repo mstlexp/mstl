@@ -27,7 +27,7 @@
 #include "typetraits.hpp"
 #include "algorithm.hpp"
 
-namespace mn {
+namespace mofw {
 
 	/**
 	 * @brief A buffer class that allocates a buffer of a given type and size.
@@ -41,7 +41,7 @@ namespace mn {
 		using allocator = TALLOCATOR;
 		using pointer = value_type*;
 		using reference = value_type&;
-		using size_type = mn::size_t;
+		using size_type = mofw::size_t;
 
 		using const_reference = const value_type&;
 		using const_pointer = const value_type*;
@@ -294,7 +294,7 @@ namespace mn {
 		void init_internal_buffer() {
 			if(m_sSize > 0)
 				m_pRawBuffer = m_allocator.allocate(m_sSize, sizeof(value_type),
-													mn::aligned_as<value_type>::res );
+													mofw::aligned_as<value_type>::res );
 		}
 
 		/**
@@ -304,7 +304,7 @@ namespace mn {
 		void init_internal_buffer(const pointer buffer) {
 			if(m_sSize > 0) {
 				m_pRawBuffer = m_allocator.allocate(m_sSize, sizeof(value_type),
-													mn::aligned_as<value_type>::res);
+													mofw::aligned_as<value_type>::res);
 
 				memcpy(m_pRawBuffer, buffer, m_sUsed * sizeof(value_type));
 			}
@@ -312,7 +312,7 @@ namespace mn {
 
 		void destroy_internal_buffer() {
 			if(m_bOwnMem && (m_pRawBuffer != 0))
-				m_allocator.deallocate(m_pRawBuffer, sizeof(value_type), mn::aligned_as<value_type>::res);
+				m_allocator.deallocate(m_pRawBuffer, sizeof(value_type), mofw::aligned_as<value_type>::res);
 		}
 	private:
 		size_type m_sSize;

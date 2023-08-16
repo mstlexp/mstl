@@ -21,15 +21,15 @@
 
 #include "functional.hpp"
 
-namespace mn {
-	using mn::byte;
+namespace mofw {
+	using mofw::byte;
 
-	template<typename IntegerType, class = typename mn::enable_if<mn::is_integral<IntegerType>::value>::type>
+	template<typename IntegerType, class = typename mofw::enable_if<mofw::is_integral<IntegerType>::value>::type>
     inline IntegerType to_integer(byte b) {
         return IntegerType(b);
     }
 
-	template < class IntegerType, class = typename mn::enable_if<mn::is_integral<IntegerType>::value>::type>
+	template < class IntegerType, class = typename mofw::enable_if<mofw::is_integral<IntegerType>::value>::type>
 	inline constexpr byte to_byte( IntegerType v ) noexcept {
     	return static_cast<byte>( v );
 	}

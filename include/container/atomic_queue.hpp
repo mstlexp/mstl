@@ -20,7 +20,7 @@
 
 #include "../atomic.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace container {
 
 		/**
@@ -29,7 +29,7 @@ namespace mn {
          * @tparam T         The type of an element
          * @tparam TMAXITEMS Maximal items can queue
          */
-        template <class T, mn::size_t TMAXITEMS >
+        template <class T, mofw::size_t TMAXITEMS >
         class basic_atomic_queue {
 		public:
 			struct node {
@@ -105,14 +105,14 @@ namespace mn {
              * @brief How many items can queue
              * @return The maximal number of entries can queue
              */
-            constexpr  mn::size_t length() noexcept {
+            constexpr  mofw::size_t length() noexcept {
                 return TMAXITEMS;
             }
             /**
              *  How many items are currently in the queue.
              *  @return the number of items in the queue.
              */
-            constexpr  mn::size_t size() noexcept {
+            constexpr  mofw::size_t size() noexcept {
                 return m_curItems.load();
             }
 
@@ -120,14 +120,14 @@ namespace mn {
              *  How many empty spaves are currently left in the queue.
              *  @return the number of remaining spaces.
              */
-            constexpr mn::size_t left() noexcept {
+            constexpr mofw::size_t left() noexcept {
             	if(full()) return 0;
                 return TMAXITEMS - m_curItems.load();
             }
 
             void swap(const self_type& other)  {
-				mn::swap(m_atHead, other.m_atHead);
-				mn::swap(m_curItems, other.m_curItems);
+				mofw::swap(m_atHead, other.m_atHead);
+				mofw::swap(m_curItems, other.m_curItems);
 			}
 
             self_type& operator = (const self_type& other) {
@@ -137,11 +137,11 @@ namespace mn {
 				return *this;
             }
 		protected:
-			mn::_atomic<pointer> m_atHead;
-			mn::atomic_size_t m_curItems;
+			mofw::_atomic<pointer> m_atHead;
+			mofw::atomic_size_t m_curItems;
         };
 
-		template <class T, mn::size_t TMAXITEMS = 64>
+		template <class T, mofw::size_t TMAXITEMS = 64>
         using atomic_queue =  basic_atomic_queue<T, TMAXITEMS>;
 	}
 }

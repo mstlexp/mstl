@@ -46,7 +46,7 @@
 #include "esp_spiram.h"
 #endif
 
-namespace mn {
+namespace mofw {
 	namespace memory {
 
 		enum class cap_allocator_map {

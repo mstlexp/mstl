@@ -21,7 +21,7 @@
 #include "../config.hpp"
 
 
-namespace mn {
+namespace mofw {
 	namespace memory {
 
 		template <size_t TMaxAlloc>

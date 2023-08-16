@@ -29,7 +29,7 @@
 #include "container/vector.hpp"
 #include "mutex.hpp"
 
-namespace mn {
+namespace mofw {
 
 	struct base_eventargs {
 		base_eventargs() = default;
@@ -63,11 +63,11 @@ namespace mn {
 		using args_type = TArgs;
 		using sender_type = TSender;
 		using sender_reference = TSender&;
-		using function_type = mn::function<void(sender_reference, const args_type)>;
+		using function_type = mofw::function<void(sender_reference, const args_type)>;
 
 		base_event(function_type func) 		 : m_ptr2Func(func) { }
 		base_event(const self_type& other)   : m_ptr2Func(other.m_ptr2Func) { }
-		base_event(const self_type&& other)  : m_ptr2Func(mn::move(other.m_ptr2Func)) { }
+		base_event(const self_type&& other)  : m_ptr2Func(mofw::move(other.m_ptr2Func)) { }
 
 		void emit(const sender_type& sender, const args_type args){
 			get_function()(sender, args);
@@ -88,7 +88,7 @@ namespace mn {
 
 	template< class TSender, typename TArgs,
 			  class TBaseEvent = base_event<TSender, TArgs>,
-			  class TContainer = mn::container::vector<TBaseEvent>
+			  class TContainer = mofw::container::vector<TBaseEvent>
 			>
 	class event_system {
 	public:

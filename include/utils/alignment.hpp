@@ -28,7 +28,7 @@
 #include "../typetraits.hpp"
 #include "../def.hpp"
 
-namespace mn {
+namespace mofw {
     namespace internal {
 
         template<typename T>

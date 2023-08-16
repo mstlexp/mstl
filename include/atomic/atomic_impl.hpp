@@ -23,8 +23,8 @@
 
 #if defined(__GNUC__) || defined(__clang__) || defined(__xlc__)
     #include "atomic_gcc.hpp"
-    #define BASE_ATOMIC_TYPE mn::basic_atomic_gcc
-    #define BASE_ATOMIC_SMART_POINTER mn::basic_smart_pointer_atomic_gcc
+    #define BASE_ATOMIC_TYPE mofw::basic_atomic_gcc
+    #define BASE_ATOMIC_SMART_POINTER mofw::basic_smart_pointer_atomic_gcc
 
     #undef ATOMIC_VAR_INIT
     #define	ATOMIC_VAR_INIT(value)		{ .__tValue = (value) }
@@ -36,7 +36,7 @@
 
 #include "waitstate.hpp"
 
-namespace mn {
+namespace mofw {
     
     namespace internal {
         template<typename TATOMIC, class TSTATE>
@@ -60,8 +60,8 @@ namespace mn {
         using difference_type = typename base_type::difference_type;
         using self_type = basic_atomic_impl<value_type>;
         using waitstate_type = basic_wait_state<basic_atomic_impl<uint64_t>>;
-        using notify_type = mn::internal::notify_token<self_type, waitstate_type>;
-        using vnotify_type = mn::internal::notify_token<volatile self_type, waitstate_type>;
+        using notify_type = mofw::internal::notify_token<self_type, waitstate_type>;
+        using vnotify_type = mofw::internal::notify_token<volatile self_type, waitstate_type>;
 
         basic_atomic_impl()  = default;
         ~basic_atomic_impl()  = default;
@@ -95,14 +95,14 @@ namespace mn {
             return notify_type{temp};
         }
 
-        void wait(T old, mn::memory_order mo = mn::memory_order::SeqCst, unsigned int timeout = MN_THREAD_CONFIG_TIMEOUT_MUTEX_DEFAULT) const {
+        void wait(T old, mofw::memory_order mo = mofw::memory_order::SeqCst, unsigned int timeout = MN_THREAD_CONFIG_TIMEOUT_MUTEX_DEFAULT) const {
             
             auto pred = [mo, old, this]() { return this->load(mo) != old; };
             auto& s = waitstate_type::for_address(this);
             s.wait(pred, timeout);
         }
 
-        void wait(T old, mn::memory_order mo = mn::memory_order::SeqCst, unsigned int timeout = MN_THREAD_CONFIG_TIMEOUT_MUTEX_DEFAULT) const volatile {
+        void wait(T old, mofw::memory_order mo = mofw::memory_order::SeqCst, unsigned int timeout = MN_THREAD_CONFIG_TIMEOUT_MUTEX_DEFAULT) const volatile {
             
             auto pred = [mo, old, this]() { return this->load(mo) != old; };
             auto& s = waitstate_type::for_address(this);

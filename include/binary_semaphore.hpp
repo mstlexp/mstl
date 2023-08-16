@@ -22,7 +22,7 @@
 #include "config.hpp"
 #include "basic_semaphore.hpp"
 
-namespace mn {
+namespace mofw {
   /**
    * \ingroup lock
    */
@@ -42,7 +42,7 @@ namespace mn {
     virtual ~basic_binary_semaphore();
   };
 
-  using binary_semaphore_t = basic_binary_semaphore;
+  
 }
 
 #endif

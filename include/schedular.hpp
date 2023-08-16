@@ -24,7 +24,7 @@
 #include "error.hpp"
 
 
-namespace mn {
+namespace mofw {
     /**
      * FreeRTOS schedular wrapper util
      * \ingroup util

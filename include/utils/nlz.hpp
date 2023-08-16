@@ -20,7 +20,7 @@
 
 #include <limits.h>
 
-namespace mn {
+namespace mofw {
 	inline size_t nlz_base(uint64_t x) {
 		 unsigned long long value = x;
 		 return sizeof(value) * CHAR_BIT - __builtin_clzll(value);

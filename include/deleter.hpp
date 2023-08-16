@@ -26,7 +26,7 @@
 
 #define config_haveDefaultDeleter 1
 
-namespace mn {
+namespace mofw {
 	namespace memory {
 		template<typename Type, class TAllocator = default_allocator>
 		using default_delete = basic_deleter<Type, TAllocator>;

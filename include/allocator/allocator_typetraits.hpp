@@ -20,9 +20,9 @@
 
 #include "../config.hpp"
 #include "../typetraits.hpp"
-#include "../utils/mn_alignment.hpp"
+#include "../utils/alignment.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace memory {
 		struct std_allocator_tag { };
 		struct nodeleter_allocator_tag { };
@@ -45,29 +45,29 @@ namespace mn {
 		}
 		template <class TAlloC>
 		struct is_thread_safe_allocator
-			: public mn::integral_constant<bool, internal::allocator_traits<TAlloC>::is_thread_safe::value> { };
+			: public mofw::integral_constant<bool, internal::allocator_traits<TAlloC>::is_thread_safe::value> { };
 
 
 		template <class TAlloC>
 		inline void* allocate(const TAlloC& alloc, size_t size, size_t alignment,
-							  mn::memory::std_allocator_tag) {
+							  mofw::memory::std_allocator_tag) {
 			return alloc.allocate(size, alignment);
 		}
 
 		template <class TAlloC>
 		inline void* allocate(const TAlloC& alloc, size_t size, size_t alignment,
-							  mn::memory::nodeleter_allocator_tag) {
+							  mofw::memory::nodeleter_allocator_tag) {
 			return alloc.allocate(size, alignment);
 		}
 		template <class TAlloC>
 		inline void* deallocate(const TAlloC& alloc, void* address, size_t size, size_t alignment,
-							   mn::memory::std_allocator_tag)  {
+							   mofw::memory::std_allocator_tag)  {
 			alloc.deallocate(address, size, alignment); return address;
 		}
 
 		template <class TAlloC>
 		inline void* deallocate(const TAlloC& alloc, void* address, size_t size, size_t alignment,
-							   mn::memory::nodeleter_allocator_tag)  {
+							   mofw::memory::nodeleter_allocator_tag)  {
 			return address;
 		}
 
@@ -108,7 +108,7 @@ namespace mn {
 				return size_t(-1);
 			}
 			static size_type max_alignment(const allocator_type& state) {
-				return mn::max_alignment;
+				return mofw::max_alignment;
 			}
         };
 

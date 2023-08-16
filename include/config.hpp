@@ -121,7 +121,7 @@
 //==================================
 #ifndef MN_THREAD_CONFIG_SIZE_TYPE
     /**
-     * The type for mn::size_t
+     * The type for mofw::size_t
      */
     #define MN_THREAD_CONFIG_SIZE_TYPE          long unsigned int
 #endif
@@ -149,7 +149,7 @@
 #endif
 
 #ifndef MN_THREAD_CONFIG_BASIC_HASHMUL_VAL
-	/// Basic value for struct::hash as basic hash calculate @see mn::hash
+	/// Basic value for struct::hash as basic hash calculate @see mofw::hash
 	#define MN_THREAD_CONFIG_BASIC_HASHMUL_VAL 2149645487U
 #endif // MN_THREAD_CONFIG_BASIC_HASHMUL_VAL
 
@@ -292,7 +292,7 @@
      * @note default: Priority for the workqueue single-threaded thread
      * @note default: basic_thread::PriorityLow
      */
-    #define MN_THREAD_CONFIG_WORKQUEUE_SINGLE_PRIORITY      mn::basic_task::priority::Low
+    #define MN_THREAD_CONFIG_WORKQUEUE_SINGLE_PRIORITY      mofw::basic_task::priority::Low
 #endif
 
 #ifndef MN_THREAD_CONFIG_WORKQUEUE_MULTI_WORKER
@@ -324,7 +324,7 @@
      * @note default: Priority for the workqueue multi-threaded for all worked thread
      * @note default: basic_thread::PriorityLow
      */
-    #define MN_THREAD_CONFIG_WORKQUEUE_MULTI_PRIORITY      mn::basic_task::priority::Low
+    #define MN_THREAD_CONFIG_WORKQUEUE_MULTI_PRIORITY      mofw::basic_task::priority::Low
 #endif
 //==================================
 // end workqueue config

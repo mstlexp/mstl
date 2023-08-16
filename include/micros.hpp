@@ -26,7 +26,7 @@
 
 MN_EXTERNC_BEGINN
 
-namespace mn {
+namespace mofw {
     /**
      * @ingroup base
      */

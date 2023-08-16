@@ -22,14 +22,14 @@
 
 #define MNNET_IPV4_ADDRESS_BYTES        4
 
-#define MNNET_IPV4_ADDRESS_ANY          mn::net::basic_ip4_address( IPADDR_ANY )
-#define MNNET_IPV4_ADDRESS_LOOPBACK     mn::net::basic_ip4_address( IPADDR_LOOPBACK )
-#define MNNET_IPV4_ADDRESS_BROADCAST    mn::net::basic_ip4_address( IPADDR_BROADCAST )
-#define MNNET_IPV4_ADDRESS_NONE         mn::net::basic_ip4_address( IPADDR_NONE )
+#define MNNET_IPV4_ADDRESS_ANY          mofw::net::basic_ip4_address( IPADDR_ANY )
+#define MNNET_IPV4_ADDRESS_LOOPBACK     mofw::net::basic_ip4_address( IPADDR_LOOPBACK )
+#define MNNET_IPV4_ADDRESS_BROADCAST    mofw::net::basic_ip4_address( IPADDR_BROADCAST )
+#define MNNET_IPV4_ADDRESS_NONE         mofw::net::basic_ip4_address( IPADDR_NONE )
 
 #include "basic_ip_address.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace net {
 		/**
 		 * @brief This class represents an internet (IP) version 6 host address.
@@ -211,7 +211,7 @@ namespace mn {
 
 			virtual void swap(basic_ip4_address& rhs) noexcept {
 				basic_ip_address::swap(rhs);
-				mn::swap<uint32_t>(as_int32, rhs.as_int32);
+				mofw::swap<uint32_t>(as_int32, rhs.as_int32);
 			}
 		};
 	}

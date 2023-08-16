@@ -22,7 +22,7 @@
 #include "config.hpp"
 #include "autolock.hpp"
 
-namespace mn {
+namespace mofw {
   class basic_task;
 
   /**

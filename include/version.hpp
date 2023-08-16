@@ -20,7 +20,7 @@
 #define _MINLIB_VERSION_H_
 
 #define MN_THREAD_VERSION_STRING_LEN sizeof(MN_VERSION_FULLVERSION_STRING) + sizeof(MN_VERSION_STATUS) + 8
-#define MN_THREAD_VERSION_INFO(PRJNAME)  mn::minilib_version_print(PRJNAME)
+#define MN_THREAD_VERSION_INFO(PRJNAME)  mofw::minilib_version_print(PRJNAME)
 
 
 #include "config.hpp"
@@ -30,7 +30,7 @@
 
 MN_EXTERNC_BEGINN
 
-namespace mn {
+namespace mofw {
 	inline const char* minilib_version_string(char version_string[MN_THREAD_VERSION_STRING_LEN]) {
 
 		snprintf(version_string, MN_THREAD_VERSION_STRING_LEN, "%s-%s-LGPL", MN_VERSION_FULLVERSION_STRING,

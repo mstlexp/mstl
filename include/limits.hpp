@@ -28,7 +28,7 @@
 
 
 
-namespace mn {
+namespace mofw {
 	/**
 	 *  @brief Describes the rounding style for floating-point types.
 	 */

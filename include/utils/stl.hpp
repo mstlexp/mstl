@@ -19,7 +19,7 @@
 #ifndef __MINILIB_STL_FUNCTIONS_H__
 #define __MINILIB_STL_FUNCTIONS_H__
 
-namespace mn {
+namespace mofw {
 	namespace stl {
 		template <typename T>
 		struct type_traits {

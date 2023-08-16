@@ -22,7 +22,7 @@
 
 #include "random.hpp"
 
-namespace mn {
+namespace mofw {
     /**
      * @brief Pseudro-Random Number Generator based on a 32-bit linear-feedback
      * shift register.  

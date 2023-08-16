@@ -24,7 +24,7 @@
 #include "../def.hpp"
 #include "../utils/mn_addressof.hpp"
 
-namespace mn {
+namespace mofw {
     namespace pointer {
 
         template <class TPR>
@@ -36,7 +36,7 @@ namespace mn {
             using pointer = typename TPR::pointer;
 
             static inline element_type* to_address(const TPR& _pPtr) noexcept {
-        		return mn::addressof<element_type>(_pPtr.get()); }
+        		return mofw::addressof<element_type>(_pPtr.get()); }
         };
 
         template <class TPR>

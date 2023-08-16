@@ -33,7 +33,7 @@
 
 
 
-namespace mn {
+namespace mofw {
 	namespace container {
 		/**
 		 * @brief An Any class represents a general type and is capable of storing any type.
@@ -61,7 +61,7 @@ namespace mn {
 				static const int TYPE_SIZE() { return sizeof(T); }
 
 				basic_any_holder_impl( T const & value ) : m_typeHold( value ) {}
-				basic_any_holder_impl( T && value ) : m_typeHold( mn::move( value ) ) {}
+				basic_any_holder_impl( T && value ) : m_typeHold( mofw::move( value ) ) {}
 
 
 				/**
@@ -132,7 +132,7 @@ namespace mn {
 			 * @brief Copy constructor, works with both empty and initialized Any values.
 			 */
 			basic_any( self_type && other ) noexcept
-				: m_asyContent.content( mn::move( other.m_asyContent ) ) {
+				: m_asyContent.content( mofw::move( other.m_asyContent ) ) {
 					other.m_asyContent = nullptr;
 			}
 
@@ -154,7 +154,7 @@ namespace mn {
 			self_type& swap( any & other ) noexcept {
 				if (this == &other) return *this;
 
-        		mn::swap( m_asyContent, other.m_asyContent );
+        		mofw::swap( m_asyContent, other.m_asyContent );
         		return *this;
     		}
 
@@ -214,7 +214,7 @@ namespace mn {
 			 * @brief Assignment operator for basic_any.
 			 */
     		self_type& operator=( self_type && other ) noexcept {
-				self_type( mn::move( other ) ).swap( *this );
+				self_type( mofw::move( other ) ).swap( *this );
 				return *this;
 			}
 
@@ -232,7 +232,7 @@ namespace mn {
 			 */
 			template< class T, class... Args >
 			void emplace( Args && ... args ) {
-				self_type( T( mn::forward<Args>(args)... ) ).swap( *this );
+				self_type( T( mofw::forward<Args>(args)... ) ).swap( *this );
 			}
 		private:
 			/**
@@ -259,7 +259,7 @@ namespace mn {
 			 * @note only call with true in deconstructor.
 			 */
 			void deconstruct(bool bdelete = false) {
-				mn::destruct<content_type>(m_asyContent);
+				mofw::destruct<content_type>(m_asyContent);
 				if(bdelete) delete m_asyContent;
 			}
 		private:
@@ -280,7 +280,7 @@ namespace mn {
 		 */
 		template< class T, class ...Args >
 		inline basic_any make_any( Args&& ...args ) {
-			return basic_any( mn::in_place_type<T>, mn::forward<Args>(args)...);
+			return basic_any( mofw::in_place_type<T>, mofw::forward<Args>(args)...);
 		}
 
 		/**

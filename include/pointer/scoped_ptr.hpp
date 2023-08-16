@@ -25,7 +25,7 @@
 #include "../algorithm.hpp"
 #include "../def.hpp"
 
-namespace mn {
+namespace mofw {
     namespace pointer {
 
         template <typename T>
@@ -40,7 +40,7 @@ namespace mn {
             explicit basic_scoped_ptr( pointer pValue = 0 )  : m_pPointer( pValue ) { }
             ~basic_scoped_ptr() { }
 
-            void swap(self_type& b)             { mn::swap<value_type*>(m_pPointer, b.m_pPointer); }
+            void swap(self_type& b)             { mofw::swap<value_type*>(m_pPointer, b.m_pPointer); }
             void reset( pointer pValue = 0)     { self_type(pValue).swap(*this); }
 
             pointer get()                       { return m_pPointer; }
@@ -60,7 +60,7 @@ namespace mn {
 		 */
 		template<typename T, typename... Args >
 		inline basic_scoped_ptr<T> make_scoped(Args&&... args) {
-			return basic_scoped_ptr<T>(new T (mn::forward<Args>(args)...) );
+			return basic_scoped_ptr<T>(new T (mofw::forward<Args>(args)...) );
 		}
 
         template <typename T>
@@ -68,6 +68,6 @@ namespace mn {
 
 
     } // namespace pointer
-} // namespace mn
+} // namespace mofw
 
 #endif

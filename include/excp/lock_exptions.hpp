@@ -27,8 +27,8 @@
         /**
          * Macro to throw the lockcreate_exception exception, debug version
          */
-        #define MN_THROW_LOCK_EXP(CODE) throw mn::error::lockcreate_exception(CODE, __LINE__, __FILE__);
-        #define MN_THROW_LOCK_EXP2(CODE, RET) throw mn::error::lockcreate_exception(CODE, __LINE__, __FILE__);
+        #define MN_THROW_LOCK_EXP(CODE) throw mofw::error::lockcreate_exception(CODE, __LINE__, __FILE__);
+        #define MN_THROW_LOCK_EXP2(CODE, RET) throw mofw::error::lockcreate_exception(CODE, __LINE__, __FILE__);
     #else
         /**
          * Macro to throw the lockcreate_exception exception, only the code
@@ -48,7 +48,7 @@
 #endif //MN_THREAD_CONFIG_USE_EXCEPTIONS
 
 #if MN_THREAD_CONFIG_USE_EXCEPTIONS ==  MN_THREAD_CONFIG_YES
-namespace mn {
+namespace mofw {
 	 namespace error {
 		/**
 		* Lock creating exception

@@ -28,7 +28,7 @@
 #include "vector.hpp"
 
 
-namespace mn {
+namespace mofw {
 	namespace container {
 
 		/**
@@ -41,8 +41,8 @@ namespace mn {
 		 */
 		template <class TKey, class TValue,
 				  class TALLOCATOR = memory::default_allocator,
-				  class TPairType = mn::container::pair<TKey, TValue>,
-				  class TContainer = mn::container::vector<TPairType, TALLOCATOR> >
+				  class TPairType = mofw::container::pair<TKey, TValue>,
+				  class TContainer = mofw::container::vector<TPairType, TALLOCATOR> >
 		class basic_light_map {
 		public:
 			using mapped_type = TValue;
@@ -54,8 +54,8 @@ namespace mn {
 			using const_reference = const TPairType&;
 			using const_pointer = const TPairType*;
 
-			using difference_type = mn::ptrdiff_t;
-			using size_type = mn::size_t;
+			using difference_type = mofw::ptrdiff_t;
+			using size_type = mofw::size_t;
 
 			using iterator = TValue*;
 			using const_iterator = const TValue*;
@@ -75,14 +75,14 @@ namespace mn {
 			}
 
 			template< class... Args >
-			mn::container::pair<iterator, bool> assign(const key_type& key, Args && ... args) {
-				value_type _value(key, mn::forward<Args>(args)...);
+			mofw::container::pair<iterator, bool> assign(const key_type& key, Args && ... args) {
+				value_type _value(key, mofw::forward<Args>(args)...);
 
 				return assign(_value);
 			}
 
-			mn::container::pair<iterator, bool> assign(const value_type& vValue) {
-				mn::container::pair<iterator, bool> _ret(vValue.seconde, false);
+			mofw::container::pair<iterator, bool> assign(const value_type& vValue) {
+				mofw::container::pair<iterator, bool> _ret(vValue.seconde, false);
 
 				for(typename TContainer::iterator it = m_ayKeyValue.begin();
 							it != m_ayKeyValue.end(); it++) {
@@ -107,8 +107,8 @@ namespace mn {
 			 *	and a bool denoting whether the insertion took place (true if insertion happened and false if not).
 			 */
 			template< class... Args >
-			mn::container::pair<iterator, bool> emplace(const key_type& key, Args && ... args) {
-				value_type _value = value_type(key, mn::forward<Args>(args)...);
+			mofw::container::pair<iterator, bool> emplace(const key_type& key, Args && ... args) {
+				value_type _value = value_type(key, mofw::forward<Args>(args)...);
 
 				return insert(_value);
 			}
@@ -119,8 +119,8 @@ namespace mn {
 			 * @return  Returns a pair consisting of an iterator to the inserted element (or to the element that
 						prevented the insertion) and a bool denoting whether the insertion took place.
 			 */
-			mn::container::pair<iterator, bool> insert( const value_type& value ) {
-				mn::container::pair<iterator, bool> result(&value, false);
+			mofw::container::pair<iterator, bool> insert( const value_type& value ) {
+				mofw::container::pair<iterator, bool> result(&value, false);
 
 				if(find(value.first) == nullptr) {
 					m_ayKeyValue.push_back(value);
@@ -132,7 +132,7 @@ namespace mn {
 
 			template< class... Args >
 			void insert_or_assign(const key_type& key, Args && ... args) {
-				value_type _value(key, mn::forward<Args>(args)...);
+				value_type _value(key, mofw::forward<Args>(args)...);
 
 				auto iter = find(key);
 				if(iter == nullptr)
@@ -159,7 +159,7 @@ namespace mn {
 			 *	 - False: The key already exists, no change is made
 			 */
 			bool insert(key_type&& key, mapped_type&& value) {
-				return insert(value_type( mn::forward(key), mn::forward(value)) ).second;
+				return insert(value_type( mofw::forward(key), mofw::forward(value)) ).second;
 			}
 
 

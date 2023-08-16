@@ -22,7 +22,7 @@
 
 #include "node.hpp"
 
-namespace mn {
+namespace mofw {
     namespace container {
 
         template<typename TNodePtr, typename TPtr, typename TRef>
@@ -79,7 +79,7 @@ namespace mn {
             using self_type = basic_list<T, TAllocator, TDeleter>;
             using value_type = T;
             using allocator_type = TAllocator;
-            using size_type = mn::size_t;
+            using size_type = mofw::size_t;
             using node_type = basic_node<T>;
 			using deleter = TDeleter;
 
@@ -230,15 +230,15 @@ namespace mn {
             }
         private:
             node_type* construct_node(const T& value) {
-                void* mem = m_allocator.allocate(NodeSize, mn::alignment_for(NodeSize) );
+                void* mem = m_allocator.allocate(NodeSize, mofw::alignment_for(NodeSize) );
                 return new (mem) node_type(value);
             }
             void destruct_node(node_type* n) {
             	if(n == nullptr) return;
 
-            	/*mn::destruct<node_type>(n);
+            	/*mofw::destruct<node_type>(n);
 
-				m_allocator.deallocate(n, NodeSize, mn::alignment_for(NodeSize));
+				m_allocator.deallocate(n, NodeSize, mofw::alignment_for(NodeSize));
 				n = nullptr;*/
 
 				get_deleter()(n);

@@ -23,7 +23,7 @@
 
 #include "shared_ptr.hpp"
 
-namespace mn {
+namespace mofw {
     namespace pointer {
         template <typename T, typename TRefType = atomic_size_t >
         class basic_weak_ptr {
@@ -64,8 +64,8 @@ namespace mn {
             count_type use_count()                  	{ return m_ref.get(); }
 
             void swap(self_type& other) {
-                mn::swap<pointer>(m_ptr, other.m_ptr);
-                mn::swap<count_type >(m_ref, other.m_ref);
+                mofw::swap<pointer>(m_ptr, other.m_ptr);
+                mofw::swap<count_type >(m_ref, other.m_ref);
             }
             template<class Y, typename YRefType = atomic_size_t>
             bool owner_before( const basic_weak_ptr<Y, YRefType> & rhs ) {
@@ -116,7 +116,7 @@ namespace mn {
 		 */
 		template<typename T, typename... Args >
 		inline weak_ptr<T>  make_weak(Args&&... args) {
-			return weak_ptr<T>(new T (mn::forward<Args>(args)...) );
+			return weak_ptr<T>(new T (mofw::forward<Args>(args)...) );
 		}
 
 		/**
@@ -126,7 +126,7 @@ namespace mn {
 		 */
 		template<typename T, typename... Args >
 		inline weak_atomic_ptr<T> make_atomic_weak(Args&&... args) {
-			return weak_atomic_ptr<T>(new T (mn::forward<Args>(args)...) );
+			return weak_atomic_ptr<T>(new T (mofw::forward<Args>(args)...) );
 		}
     }
 }

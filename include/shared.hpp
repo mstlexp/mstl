@@ -27,7 +27,7 @@
 
 #include "autolock.hpp"
 
-namespace mn {
+namespace mofw {
     /**
      * Template class used to protect a shared resource with a Mutex.
      * @ingroup preview

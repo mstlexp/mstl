@@ -39,7 +39,7 @@
  */
 extern "C" void vApplicationTickHook(void);
 
-namespace mn {
+namespace mofw {
     /**
      * Wrapper class for Tick hooks, functions you want to run within the tick ISR.
      *

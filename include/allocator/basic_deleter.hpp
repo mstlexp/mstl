@@ -26,7 +26,7 @@
 
 #include "../functional.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace memory {
 		/**
 		 * @brief A Simple template for a deleter.
@@ -89,7 +89,7 @@ namespace mn {
 			 * @brief Calls @c deallocate @p pArray
 			 */
 			void operator()(value_type* pP) noexcept {
-				static_assert(!mn::is_void<value_type>::value, "can't delete pP to incomplete type");
+				static_assert(!mofw::is_void<value_type>::value, "can't delete pP to incomplete type");
 				static_assert(sizeof(value_type) > 0, "can't delete pP to incomplete type");
 
                 m_refAllocator->deallocate(pP, sizeof(value_type), alignof(value_type));
@@ -113,7 +113,7 @@ namespace mn {
 			using reference = TAllocator&;
 
 			template<typename U>
-			using remove_cv_type = typename mn::remove_cv<U>::type;
+			using remove_cv_type = typename mofw::remove_cv<U>::type;
 
 			/**
 			 * @brief Like is_base_of<_Tp, _Up> but false if unqualified types are the same

@@ -23,7 +23,7 @@
 #include "../algorithm.hpp"
 #include "../def.hpp"
 
-namespace mn {
+namespace mofw {
 	 namespace pointer {
 
 	 	/**
@@ -50,7 +50,7 @@ namespace mn {
 			basic_auto_ptr(const self_type& other )
 				: m_ptr(other.m_ptr) { }
 			basic_auto_ptr(basic_auto_ptr&& other) noexcept
-				: m_ptr(mn::move(other.m_ptr)) { other.m_ptr = nullptr; }
+				: m_ptr(mofw::move(other.m_ptr)) { other.m_ptr = nullptr; }
 
 			template <class TO>
 			basic_auto_ptr(const basic_auto_ptr<TO>& other)
@@ -66,7 +66,7 @@ namespace mn {
 			void reset(const self_type& ptr)						{ assign(ptr); }
 
 
-			void 	swap(self_type& ptr)							{ mn::swap(m_ptr, ptr.m_ptr); }
+			void 	swap(self_type& ptr)							{ mofw::swap(m_ptr, ptr.m_ptr); }
 			pointer get()											{ return m_ptr; }
 			bool 	isNull() const									{ return m_ptr == nullptr; }
 
@@ -199,7 +199,7 @@ namespace mn {
 		 */
 		template<typename T, typename... Args >
 		inline auto_ptr<T> make_auto(Args&&... args) {
-			return auto_ptr<T>(new T (mn::forward<Args>(args)...) );
+			return auto_ptr<T>(new T (mofw::forward<Args>(args)...) );
 		}
 
 	 }

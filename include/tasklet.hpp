@@ -28,7 +28,7 @@
 #include "micros.hpp"
 #include "sleep.hpp"
 
-namespace mn {
+namespace mofw {
     /**
      *  A FreeRTOS wrapper for its concept of a Pended Function.
      *  In Linux, one permutation of this would be a Tasklet, or

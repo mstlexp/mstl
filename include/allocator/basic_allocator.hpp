@@ -23,11 +23,11 @@
 #include "../algorithm.hpp"
 #include "../functional.hpp"
 #include "../typetraits.hpp"
-#include "../utils/mn_alignment.hpp"
+#include "../utils/alignment.hpp"
 
 #include "basic_allocator_maximal_filter.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace memory {
 
 		/**
@@ -55,7 +55,7 @@ namespace mn {
 			using value_type = void;
 			using pointer = void*;
 			using const_pointer = const void*;
-			using difference_type = mn::ptrdiff_t;
+			using difference_type = mofw::ptrdiff_t;
 			using size_type = size_t;
 
 			basic_allocator() noexcept  { TAllocator::first();  }
@@ -84,7 +84,7 @@ namespace mn {
 			 * @return Pointer to new memory, or NULL if allocation fails.
 			 */
 			pointer allocate(size_t size) {
-				return allocate(size, mn::alignment_for(size));
+				return allocate(size, mofw::alignment_for(size));
 			}
 
 			/**
@@ -96,7 +96,7 @@ namespace mn {
 			 * @return Pointer to new memory, or NULL if allocation fails.
 			 */
 			pointer allocate(size_t count, size_t size, size_t alignment = 0) {
-				return allocate(count * size, (alignment == 0) ? mn::alignment_for(size) : alignment);
+				return allocate(count * size, (alignment == 0) ? mofw::alignment_for(size) : alignment);
 			}
 
 
@@ -119,7 +119,7 @@ namespace mn {
 			 * @param size The size of the Type
 			 */
 			void deallocate(pointer address, size_t size) noexcept {
-				deallocate(address, size, mn::alignment_for(size));
+				deallocate(address, size, mofw::alignment_for(size));
 			}
 
 			/**
@@ -132,7 +132,7 @@ namespace mn {
 			void deallocate(pointer address, size_t count, size_t size, size_t alignment) noexcept {
 				size = size * count;
 				if(m_fFilter.on_pre_dealloc(size, alignment)) {
-					TAllocator::deallocate(address, size, (alignment == 0) ? mn::alignment_for(size) : alignment);
+					TAllocator::deallocate(address, size, (alignment == 0) ? mofw::alignment_for(size) : alignment);
 					m_fFilter.on_dealloc(size, alignment);
 				}
 			}
@@ -146,9 +146,9 @@ namespace mn {
 			Type* construct(Args&&... args) {
 				auto _size = sizeof(Type);
 
-				void* _mem = allocate(_size, mn::alignment_for(_size) );
+				void* _mem = allocate(_size, mofw::alignment_for(_size) );
 
-				return ::new (_mem) Type(mn::forward<Args>(args)...);
+				return ::new (_mem) Type(mofw::forward<Args>(args)...);
 			}
 
 			/**
@@ -162,8 +162,8 @@ namespace mn {
 
 				auto _size = sizeof(Type);
 
-				mn::destruct<Type>(address);
-				deallocate(address, _size, mn::alignment_for(_size));
+				mofw::destruct<Type>(address);
+				deallocate(address, _size, mofw::alignment_for(_size));
 			}
 
 			/**

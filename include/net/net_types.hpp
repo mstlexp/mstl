@@ -29,9 +29,9 @@
 #define UDPLITE_RECV_CSCOV 0x02
 #endif // UDPLITE_RECV_CSCOV
 
-#define SERVICE_PROVIDES_TOS(tos) (mn::net::service_provides) ((tos) & mn::net::service_provides::tos_mask)
+#define SERVICE_PROVIDES_TOS(tos) (mofw::net::service_provides) ((tos) & mofw::net::service_provides::tos_mask)
 
-namespace mn {
+namespace mofw {
 	namespace net {
 
 		/**

@@ -25,7 +25,7 @@
 #include "default_allocator.hpp"
 #include "utils/addressof.hpp"
 
-namespace mn {
+namespace mofw {
 	namespace memory {
 
 		template<class TAllocator>
@@ -58,7 +58,7 @@ namespace mn {
 			};
 
 			template<class, class = void>
-			struct ptr_difference { using type = mn::ptrdiff_t;  }
+			struct ptr_difference { using type = mofw::ptrdiff_t;  }
 
 			template<class T>
 			struct ptr_difference<T, typename ptr_void<typename T::difference_type>::type> {
@@ -108,7 +108,7 @@ namespace mn {
 		struct pointer_traits<T*> {
 			using pointer = T*;
 			using element_type = T;
-			using difference_type = mn::ptrdiff_t;
+			using difference_type = mofw::ptrdiff_t;
 
 			template<class U>
 			struct rebind_to {
@@ -118,7 +118,7 @@ namespace mn {
 			using rebind = U*;
 
 			static T* pointer_to(typename detail::ptr_value<T>::type& v) noexcept {
-			 	return mn::addressof(v);
+			 	return mofw::addressof(v);
 			}
 		};
 		template<class T> constexpr inline T* to_address(T* v) noexcept {
@@ -135,7 +135,7 @@ namespace mn {
 
 			template<class T>
 			inline auto ptr_address(const T& v, int) noexcept -> decltype(to_address(v)) {
-				return mn::memory::pointer_traits<T>::to_address(v);
+				return mofw::memory::pointer_traits<T>::to_address(v);
 			}
 			template<class T>
 			inline auto ptr_address(const T& v, long) noexcept {

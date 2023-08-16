@@ -21,7 +21,7 @@
 #include "system_lock.hpp"
 
 
-namespace mn {
+namespace mofw {
     namespace system {
         /**
          * Wrapper class around FreeRTOS's implementation of a critical sections.

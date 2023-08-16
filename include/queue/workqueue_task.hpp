@@ -21,7 +21,7 @@
 
 #include "../task.hpp"
 
-namespace mn {
+namespace mofw {
     namespace queue {
         class basic_work_queue;
 

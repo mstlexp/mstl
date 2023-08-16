@@ -21,10 +21,10 @@
 #include "fixed_vector.hpp"
 #include "sorted_vector.hpp"
 
-namespace mn {
+namespace mofw {
     namespace container {
 
-        template<typename TKey, typename TValue,  int TCapacity, class TAllocator, class TCompare = mn::less<TKey> >
+        template<typename TKey, typename TValue,  int TCapacity, class TAllocator, class TCompare = mofw::less<TKey> >
 		class basic_fixed_sorted_vector : public basic_sorted_vector<TKey, TValue, TAllocator, TCompare,
                                     fixed_vector_storage< basic_pair<TKey, TValue>, TAllocator, TCapacity > > {
             using base_type = basic_sorted_vector<TKey, TValue, TAllocator, TCompare, fixed_vector_storage< basic_pair<TKey, TValue>, TAllocator, TCapacity > >;

@@ -21,12 +21,11 @@
 
 #include "config.hpp"
 
-#if MN_THREAD_CONFIG_CONDITION_VARIABLE_SUPPORT == MN_THREAD_CONFIG_YES
     #include "convar.hpp"
     #include "convar_task.hpp"
     #include "autolock.hpp"
 
-namespace mn {
+namespace mofw {
     /**
      * \ingroup lock
      */
@@ -74,5 +73,4 @@ namespace mn {
     };
 }
 
-#endif //MN_THREAD_CONFIG_CONDITION_VARIABLE_SUPPORT
 #endif //MINLIB_ESP32_TIMED_LOCK_
